@@ -3,7 +3,7 @@ import React from "react";
 import PendingComp from "../components/PendingComp";
 import Layout from "../components/Layout";
 
-const NewTicketScreen = ({ navigation }) => {
+const PendingTicketsScreen = ({ navigation }) => {
 
   return (
     <Layout 
@@ -18,4 +18,4 @@ const NewTicketScreen = ({ navigation }) => {
 
 
 
-export default NewTicketScreen;
+export default PendingTicketsScreen;
