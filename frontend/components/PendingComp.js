@@ -1,37 +1,51 @@
-import { View, Text, TextInput, FlatList, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
-
+import React, { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import colors from '../config/colors';
 
-const pendingComp = () => {
+const PendingComp = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const solicitudesData = [
-    { id: 1, nombre: "Charlie", titulo: "Requerimiento A", fecha: "2023-09-15" },
-    { id: 2, nombre: "David", titulo: "Solicitud B", fecha: "2023-09-16" },
-    { id: 3, nombre: "Frank", titulo: "Requerimiento C", fecha: "2023-09-17" },
-    { id: 4, nombre: "Grace", titulo: "Requerimiento D", fecha: "2023-09-18" },
-  ];
+  const [solicitudesData, setSolicitudesData] = useState([
+    { id: 1, nombre: "Charlie", titulo: "Requerimiento A", fecha: "2023-09-15", estado: "Proceso" },
+    { id: 2, nombre: "David", titulo: "Solicitud B", fecha: "2023-09-16", estado: "Proceso" },
+  ]);
+
+  const toggleDropdown = (item) => {
+    setSelectedItem(item);
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
+  const updateStatus = (status) => {
+    const updatedData = solicitudesData.map((dataItem) =>
+      dataItem.id === selectedItem.id ? { ...dataItem, estado: status } : dataItem
+    );
+    setSolicitudesData(updatedData);
+    setIsDropdownVisible(false);
+  };
 
   const renderTableRow = (item) => (
-    <View style={styles.tableRow}>
-      <Text>{item.nombre}</Text>
-      <Text>{item.titulo}</Text>
-      <Text>{item.fecha}</Text>
+    <View style={styles.tableRow} key={item.id}>
+      <Text style={[styles.tableCell, { width: 100 }]}>{item.nombre}</Text>
+      <Text style={[styles.tableCell, { width: 200 }]}>{item.titulo}</Text>
+      <Text style={[styles.tableCell, { width: 100 }]}>{item.fecha}</Text>
+      <TouchableOpacity
+        style={[styles.statusCell, { width: 100 }]}
+        onPress={() => toggleDropdown(item)}
+      >
+        <Text>{item.estado}</Text>
+      </TouchableOpacity>
     </View>
   );
 
-  const filteredsolicitudesData = solicitudesData.filter((item) =>
-    item.nombre.toLowerCase().includes(searchText.toLowerCase())
-  );
-
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.statusContainer}>
         <View style={styles.statusBox}>
           <Text style={styles.statusText}>Abiertos</Text>
         </View>
-        
+
         <View style={styles.space} />
 
         <View style={styles.statusBox}>
@@ -42,35 +56,64 @@ const pendingComp = () => {
       <View style={styles.titleContainer}>
         <View style={styles.requirementBox}>
           <Text style={styles.requirementTitle}>Solicitudes de usuario</Text>
-
-          <View style={styles.filterContainer}>
-            <Text style={styles.filterText}>Filtro:</Text>
-            <TextInput
-              style={styles.filterInput}
-              placeholder="Buscar ticket ..."
-              onChangeText={(text) => setSearchText(text)}
-            />
-          </View>
-          
-          <View style={styles.sectionContainer}>
-            <View style={styles.tableHeader}>
-              <Text style={styles.tableHeaderText}>Nombre</Text>
-              <Text style={styles.tableHeaderText}>Título</Text>
-              <Text style={styles.tableHeaderText}>Fecha</Text>
-            </View>
-            <FlatList
-              data={filteredsolicitudesData}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => renderTableRow(item)}
-            />
-          </View>
         </View>
+        <View style={styles.filterContainer}>
+          <Text style={styles.filterText}>Filtro:</Text>
+          <TextInput
+            style={styles.filterInput}
+            placeholder="Buscar ticket ..."
+            onChangeText={(text) => setSearchText(text)}
+          />
+        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <View style={styles.tableContainer}>
+            <View style={styles.table}>
+              <View style={styles.tableHeader}>
+                <Text style={[styles.headerCell, { width: 100 }]}>Nombre</Text>
+                <Text style={[styles.headerCell, { width: 200 }]}>Título</Text>
+                <Text style={[styles.headerCell, { width: 100 }]}>Fecha</Text>
+                <Text style={[styles.headerCell, { width: 100 }]}>Estado</Text>
+              </View>
+              {solicitudesData.map((item) => renderTableRow(item))}
+            </View>
+          </View>
+        </ScrollView>
+        {isDropdownVisible && (
+          <Modal animationType="slide" transparent={true} visible={isDropdownVisible}>
+            <TouchableOpacity
+              style={styles.modalOverlay}
+              onPress={() => setIsDropdownVisible(false)}
+            />
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <Text
+                  style={styles.modalOption}
+                  onPress={() => updateStatus("Pendiente")}
+                >
+                  Pendiente
+                </Text>
+                <Text
+                  style={styles.modalOption}
+                  onPress={() => updateStatus("Observado")}
+                >
+                  Observado
+                </Text>
+                <Text
+                  style={styles.modalOption}
+                  onPress={() => updateStatus("Proceso")}
+                >
+                  Proceso
+                </Text>
+              </View>
+            </View>
+          </Modal>
+        )}
       </View>
-    </View>
-  )
-}
+    </ScrollView>
+  );
+};
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
@@ -99,27 +142,22 @@ styles = StyleSheet.create({
     fontSize: 11,
   },
   titleContainer: {
-    alignItems: "left",
     marginBottom: 15,
-    borderColor: "gray",
-    borderWidth: 0.8,
     marginHorizontal: 20,
     borderTopRightRadius: 5,
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
+    borderWidth: 1,
+    borderColor: "black",
   },
   requirementTitle: {
     fontSize: 15,
     fontWeight: "light",
-    backgroundColor: colors.primGray ,
+    backgroundColor: colors.primGray,
     padding: 10,
-    borderWidth: 0.5,
-    borderColor: colors.primGray,
   },
   requirementBox: {
-    backgroundColor: "#E7E7E" ,
-    height: 635,
-    borderWidth: 0.1,
+    backgroundColor: "#E7E7E",
     borderColor: "E7E7E",
   },
   filterContainer: {
@@ -141,9 +179,19 @@ styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
   },
-  sectionContainer: {
-    marginTop: 20,
-    paddingHorizontal: 20,
+  tableContainer: {
+    marginTop: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20,
+  },
+  table: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
   },
   tableHeader: {
     flexDirection: "row",
@@ -153,19 +201,61 @@ styles = StyleSheet.create({
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
   },
-  tableHeaderText: {
+  headerCell: {
     color: "white",
     fontWeight: "bold",
+    textAlign: "center",
   },
   tableRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: colors.primGray,
+    alignItems: "center",
+    marginBottom: 10,
     padding: 10,
-    borderBottomWidth: .5,
-    borderBottomColor: "black",
+    backgroundColor: "white",
+    borderRadius: 5,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+  },
+  tableCell: {
+    textAlign: "center",
+    minWidth: 100,
+    padding: 5,
+  },
+  statusCell: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: colors.primary,
+    paddingVertical: 5,
+    borderRadius: 5,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContainer: {
+    position: "absolute",
+    top: "40%", // Alineado verticalmente al 40% de la pantalla
+    left: 0,
+    right: 0,
+    backgroundColor: "white",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    alignSelf: 'center', // Centra el modal horizontalmente
+    maxWidth: 300, // Establece un ancho máximo para el modal
+  },
+  modalContent: {
+    padding: 20,
+    justifyContent: 'center', // Centra las opciones verticalmente en el modal
+  },
+  modalOption: {
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "gray",
   },
 });
 
-
-export default pendingComp
+export default PendingComp;
