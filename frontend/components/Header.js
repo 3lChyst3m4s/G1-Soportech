@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import logoW from '../assets/logoW.png'
+import logoW from '../assets/images/logoW.png'
 import colors from '../config/colors' 
 
 const Header = ({ nombreVista, onMenuPress, navigation }) => {
