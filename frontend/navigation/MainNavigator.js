@@ -5,7 +5,9 @@ import SolverNavigator from './SolverNavigator';
 import SupervisorNavigator from './SupervisorNavigator';
 
 
-const MainNavigator = ({ userRole }) => {
+const MainNavigator = () => {
+  const userRole = 'client';
+
   return (
     <>
       {userRole == 'client' && <ClientNavigator />}

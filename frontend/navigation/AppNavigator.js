@@ -15,7 +15,7 @@ const AppNavigator = () => {
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Auth" component={AuthNavigator} />
-      <Stack.Screen name="Root" component={() => <MainNavigator userRole={userRole} />} />
+      <Stack.Screen name="Root" component={MainNavigator} />
     </Stack.Navigator>
   );
 };

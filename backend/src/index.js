@@ -1,7 +1,8 @@
 import app from "./app";
-import { sequelize } from "./config";
+import { sequelize } from "./database";
+import { server } from "./config";
 
-const PORT = 3000;
+const PORT = server.port;
 
 const startServer = async () => {
   try {

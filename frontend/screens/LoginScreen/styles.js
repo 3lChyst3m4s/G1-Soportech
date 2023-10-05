@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     borderWidth: 1,
   },
+  forgotPassword: {
+    color: colors.primary,
+    marginBottom: 10,
+  },
+  // Wave styles
   waveContainer: {
     position: 'absolute',
     left: -206,

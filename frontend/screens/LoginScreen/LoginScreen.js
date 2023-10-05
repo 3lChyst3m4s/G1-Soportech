@@ -4,7 +4,9 @@ import { View, Text, Image, TextInput, KeyboardAvoidingView, TouchableWithoutFee
 
 import styles from './styles';
 
-import PrincipalButton from '../../components/PrincipalButton';
+import { LoginButton } from '../../components/LoginButton';
+import { RegisterButton } from '../../components/RegisterButton';
+
 import logo from '../../assets/images/logo.png';
 import ola1 from '../../assets/images/ola1.png';
 import ola2 from '../../assets/images/ola2.png';
@@ -63,10 +65,12 @@ const LoginScreen = ({ navigation }) => {
             value={formData.password}
             onChangeText={(text) => handleInputChange('password', text)}
           />
-          <PrincipalButton
+          <LoginButton
             title="Iniciar Sesión"
             onPress={onSubmit}
           />
+          <Text style={styles.forgotPassword}>¿Olvidaste tu contraseña?</Text>
+          <RegisterButton navigation={navigation}/>
         </View>
         <KeyboardAvoidingView enabled>
           <View style={styles.waveContainer}>

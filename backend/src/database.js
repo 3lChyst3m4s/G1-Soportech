@@ -1,6 +1,9 @@
-import mysql from 'mysql2/promise';
-import { config } from './config';
+import Sequelize from 'sequelize';
+import { database } from './config.js';
 
-export const connect = async () => {
-  return await mysql.createConnection(config);
-};
+const dbConfig = database;
+
+export const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
+  host: dbConfig.host,
+  dialect: 'mysql',
+});

@@ -1,8 +1,14 @@
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, Image, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
 import { useAuth } from '../../context/AuthContext'
 import styles from './styles';
+
+import PrincipalButton from '../../components/PrincipalButton';
+
+import logo from '../../assets/images/logo.png';
+import ola1 from '../../assets/images/ola1.png';
+import ola2 from '../../assets/images/ola2.png';
 
 const RegisterScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({

@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { registerRequest, loginRequest } from "../Api";
 
 const AuthContext = createContext();
@@ -11,12 +11,6 @@ const useAuth = () => {
   }
 
   return context;
-};
-
-const testUser = {
-  username: 'TestUser',
-  email: 'TestEmail@gmail.com',
-  password: 'TestPassword',
 };
 
 const AuthProvider = ({ children }) => {
@@ -36,12 +30,8 @@ const AuthProvider = ({ children }) => {
 
   const login = async (user) => {
     try {
-      //const res = await loginRequest(user);
-      //setUser(res.data);
-      if (user.email !== testUser.email || user.password !== testUser.password) {
-        throw new Error("Invalid credentials");
-      }
-      setUser(testUser);
+      const res = await loginRequest(user);
+      setUser(res.data);
       setIsAuthenticated(true);
     } catch (error) {
       setErrors(error.response.data);
@@ -52,6 +42,16 @@ const AuthProvider = ({ children }) => {
     setUser(null);
     setIsAuthenticated(false);
   };
+
+  useEffect(() => {
+    if(errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 3000)
+      return () => clearTimeout(timer);
+    }
+  }
+  , [errors]);
 
   return (
     <AuthContext.Provider
