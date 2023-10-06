@@ -3,28 +3,31 @@ import bcrypt from "bcryptjs";
 import { createAccessToken } from "../lib/jwt.js";
 
 export const register = async (req, res) => {
-  const { username, email, password } = req.body;
-
+  const { name, email, password } = req.body;
   try {
-    const userFound = await User.findOne({ email });
+    const userFound = await User.findOne({ where: { email } });
     if (userFound) return res.status(400).json(["The email already exists"]);
 
     const passwordHash = await bcrypt.hash(password, 10);
 
     const newUser = new User({
-      username,
+      name,
       email,
       password: passwordHash,
+      phone: "987654321",
+      address: "TestAddress",
+      city: "TestCity",
+      roleId: 1,
     });
 
     const userSaved = await newUser.save();
-    const token = await createAccessToken({ id: userSaved._id });
+    const token = await createAccessToken({ userId: userSaved.userId });
 
     res.cookie("token", token);
 
     res.json({
-      id: userSaved.id,
-      username: userSaved.username,
+      userId: userSaved.userId,
+      name: userSaved.name,
       email: userSaved.email,
       createdAt: userSaved.createdAt,
       updatedAt: userSaved.updatedAt,
@@ -38,21 +41,24 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const userFound = await User.findOne({ email });
+    const userFound = await User.findOne({ where: { email } });
     if (!userFound) return res.status(400).json({ message: "User not found" });
 
     const isMatch = await bcrypt.compare(password, userFound.password);
     if (!isMatch)
       return res.status(400).json({ message: "Incorrect password" });
 
-    const token = await createAccessToken({ id: userFound.id });
+    const token = await createAccessToken({ userId: userFound.userId });
 
     res.cookie("token", token);
 
     res.json({
-      id: userFound.id,
-      username: userFound.username,
+      userId: userFound.userId,
+      name: userFound.name,
       email: userFound.email,
+      phone: userFound.phone,
+      address: userFound.address,
+      city: userFound.city,
       createdAt: userFound.createdAt,
       updatedAt: userFound.updatedAt,
     });
@@ -70,13 +76,13 @@ export const logout = (req, res) => {
 };
 
 export const profile = async (req, res) => {
-  const userFound = await User.findById(req.user.id);
+  const userFound = await User.findByuserId(req.user.userId);
 
   if (!userFound) return res.status(400).json({ message: "User not found" });
 
   return res.json({
-    id: userFound.id,
-    username: userFound.username,
+    userId: userFound.userId,
+    name: userFound.name,
     email: userFound.email,
     createdAt: userFound.createdAt,
     updatedAt: userFound.updatedAt,

@@ -8,8 +8,11 @@ import tasksRoutes from "./routes/tasks.routes.js";
 
 const app = express();
 
-app.use(
-  cors());
+const corsOptions = {
+  origin: 'http://localhost:19006',
+};
+
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());

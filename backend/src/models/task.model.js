@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
+import User from './user.model';
 
 
 const Task = sequelize.define('Task', {
@@ -19,8 +20,8 @@ const Task = sequelize.define('Task', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Users',
-      key: 'id',
+      model: User,
+      key: 'userId',
     },
   },
 }, {

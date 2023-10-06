@@ -3,7 +3,7 @@ import { View, Text, TextInput, Modal, TouchableOpacity } from 'react-native'
 
 import { ScrollView } from "react-native-gesture-handler";
 
-import { logo } from "../../../../assets/images/logo.png";
+import logo from "../../../../assets/images/logo.png";
 
 import Layout from "../../../../components/Layout";
 import styles from './styles';

@@ -7,7 +7,6 @@ import MainNavigator from './MainNavigator';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
-  const userRole = 'solver';
 
   return (
     <Stack.Navigator
