@@ -4,15 +4,18 @@ import ClientNavigator from './ClientNavigator';
 import SolverNavigator from './SolverNavigator';
 import SupervisorNavigator from './SupervisorNavigator';
 
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const MainNavigator = () => {
-  const userRole = 'client';
+  const { user } = useContext(AuthContext);
+  const userRole = user.roleId;
 
   return (
     <>
-      {userRole == 'client' && <ClientNavigator />}
-      {userRole == 'solver' && <SolverNavigator />}
-      {userRole == 'supervisor' && <SupervisorNavigator />}
+      {userRole == 1 && <ClientNavigator />}
+      {userRole == 2 && <SolverNavigator />}
+      {userRole == 3 && <SupervisorNavigator />}
     </>
   );
 };

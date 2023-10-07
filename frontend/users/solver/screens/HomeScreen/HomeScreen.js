@@ -13,10 +13,10 @@ const HomeScreen = ({navigation}) => {
   return (
     <Layout 
       navigation={navigation}
-      title={user.username}
+      title={user.name}
       screen={
         <View style={styles.container}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Pending")}>
             <View style={styles.leftPart}>
               <Image source={logo}  style={[styles.icon, { tintColor: 'white' }]} />
             </View>
@@ -26,7 +26,7 @@ const HomeScreen = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <View style={styles.separator} />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Closed")}>
             <View style={styles.leftPart}>
               <Image source={logo}  style={[styles.icon, { tintColor: 'white' }]} />
             </View>

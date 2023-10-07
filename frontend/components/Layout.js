@@ -23,7 +23,6 @@ const Layout = ({navigation, title, screen}) => {
   }
 
   const logoutUser = () => {
-    logout();
     goToScreen('Login');
   }
 

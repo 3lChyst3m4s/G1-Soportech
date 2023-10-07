@@ -14,12 +14,14 @@ const PendingTicketScreen = ({ navigation }) => {
     { id: 4, nombre: "Grace", titulo: "Requerimiento D", fecha: "2023-09-18" },
   ];
 
+
+
   const renderTableRow = (item) => (
-    <View style={styles.tableRow}>
+    <TouchableOpacity onPress={() => handleRowPress(item.id)} style={styles.tableRow}>
       <Text>{item.nombre}</Text>
       <Text>{item.titulo}</Text>
       <Text>{item.fecha}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   const filteredsolicitudesData = solicitudesData.filter((item) =>

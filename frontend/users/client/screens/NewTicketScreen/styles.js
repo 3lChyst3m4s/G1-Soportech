@@ -27,12 +27,37 @@ const styles = StyleSheet.create({
     width: 330,
     height: 40,
     marginVertical: 30,
+    paddingHorizontal: 10,
   },
   space2: {
     backgroundColor: colors.support,
     width: 330,
     height: 300,
     marginBottom: 30,
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    textAlignVertical: 'top',
+  },
+  modalContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    padding: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  optionItem: {
+    fontSize: 16,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  closeButton: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginVertical: 10,
   },
 });
 

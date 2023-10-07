@@ -3,9 +3,9 @@ import React from 'react'
 
 import colors from '../config/colors'
 
-const PrincipalButton = ({ title, onPress }) => {
+const PrincipalButton = ({ title, onPress, selected }) => {
   return (
-    <TouchableOpacity style={styles.principalButton} onPress={onPress}>
+    <TouchableOpacity style={[styles.principalButton, selected && styles.selectedPrincipalButton]} onPress={onPress}>
       <Text style={styles.principalButtonText}>{title}</Text>
     </TouchableOpacity>
   );
@@ -26,6 +26,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  selectedPrincipalButton: {
+    backgroundColor: "#5d6AE0",
+  },
 });
+
 
 export default PrincipalButton
