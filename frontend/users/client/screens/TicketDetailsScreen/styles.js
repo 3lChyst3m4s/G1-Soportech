@@ -14,6 +14,16 @@ const styles = StyleSheet.create({
   space: {
     width: 0.5,
   },
+  activeTabBox: {
+    backgroundColor: '#5D6AE0',
+    padding: 3,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    width: 85,
+    height: 25,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   statusBox: {
     backgroundColor: colors.primary,
     padding: 3,
@@ -25,12 +35,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   activeTabText: {
-    color: '#000', // Color del texto cuando la pestaña está activa
-    fontWeight: 'bold', // Fuente en negrita para indicar que está seleccionada
-    fontSize: 16,
-    padding: 10,
-    borderBottomWidth: 2,
-    borderBottomColor: '#000', // Línea de abajo cuando la pestaña está activa
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 11,
+    borderBottomColor: 'white',
   },  
   statusText: {
     color: "white",
@@ -41,7 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  ContainerTitle: {
+  ContainerInfo: {
     borderColor: "gray",
     backgroundColor: "#E7EDFF",
     marginHorizontal: 20,
@@ -71,9 +79,72 @@ const styles = StyleSheet.create({
     fontWeight: "light",
     fontSize: 14,
   },
+  ContainerLog: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderColor: "gray",
+    backgroundColor: "#E7EDFF",
+    marginHorizontal: 20,
+    height: 377,
+  },
   sectionContainer: {
     marginTop: 20,
     paddingHorizontal: 20,
+  },
+  messageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  supportMessage: {
+    flexDirection: 'row', 
+    justifyContent: 'flex-start',
+  },
+  userMessage: {
+    flexDirection: 'row', 
+    justifyContent: 'flex-end',
+  },
+  messageCont: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginLeft: 10,
+  },
+  supportTitle: {
+    alignSelf: 'flex-start',
+    color: colors.primary,
+    fontSize: 15,
+  },
+  userTitle: {
+    alignSelf: 'flex-end',
+    color: colors.primary,
+    fontSize: 15,
+  },
+  messageUser: {
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
+  messageText: {
+    backgroundColor: '#f0f0f0',
+    padding: 8,
+    borderRadius: 10,
+  },
+  messageInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  messageInput: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+    padding: 8,
+    borderRadius: 10,
+  },
+  sendMessageButton: {
+    marginLeft: 10,
+    padding: 8,
+    backgroundColor: colors.primary,
+    color: '#fff',
+    borderRadius: 10,
   },
 });
 
