@@ -1,12 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import { View, Text, TouchableOpacity, FlatList, TextInput } from 'react-native'
 
 import Layout from "../../../../components/Layout";
 import styles from './styles';
 
+import PrincipalButton from "../../../../components/PrincipalButton";
+
 const TicketDetailsScreen = ({ route, navigation }) => {
   const { itemId } = route.params;
   const [activeTab, setActiveTab] = useState('informacion');
+  const flatListRef = useRef(null);
 
   const [messages, setMessages] = useState([
     { id: 1, text: 'Hola, ¿en qué puedo ayudarte?', user: 'Soporte' },
@@ -28,6 +31,12 @@ const TicketDetailsScreen = ({ route, navigation }) => {
       setNewMessage('');
     }
   };
+
+  useEffect(() => {
+    if (flatListRef.current) {
+      flatListRef.current.scrollToOffset({ offset: 0, animated: true });
+    }
+  }, [messages]);
 
   return (
     <Layout
@@ -79,38 +88,52 @@ const TicketDetailsScreen = ({ route, navigation }) => {
           )}
 
           {activeTab === 'log' && (
-            <View style={styles.ContainerLog}>
-              <FlatList
-                data={messages}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                  <View style={[
-                    styles.messageContainer,
-                    item.user === 'Soporte' ? styles.supportMessage : styles.userMessage
-                  ]}>
-                    <View style={styles.messageCont}>
-                      <Text style={[
-                        styles.messageUser,
-                        item.user === 'Soporte' ? styles.supportTitle : styles.userTitle
-                      ]}>
-                        {item.user}
-                      </Text>
-                      <Text style={styles.messageText}>{item.text}</Text>
+            <View>
+              <View style={styles.ContainerLog}>
+                <FlatList
+                  ref={flatListRef}
+                  data={messages}
+                  keyExtractor={(item) => item.id.toString()}
+                  renderItem={({ item }) => (
+                    <View style={[
+                      styles.messageContainer,
+                      item.user === 'Soporte' ? styles.supportMessage : styles.userMessage
+                    ]}>
+                      <View style={styles.messageCont}>
+                        <Text style={[
+                          styles.messageUser,
+                          item.user === 'Soporte' ? styles.supportTitle : styles.userTitle
+                        ]}>
+                          {item.user}
+                        </Text>
+                        <Text style={styles.messageText}>{item.text}</Text>
+                      </View>
                     </View>
-                  </View>
-                )}
-              />
-              <View style={styles.messageInputContainer}>
-                <TextInput
-                  style={styles.messageInput}
-                  placeholder="Escribe un mensaje..."
-                  value={newMessage}
-                  onChangeText={(text) => setNewMessage(text)}
+                  )}
+                  onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
                 />
-                <TouchableOpacity onPress={handleSendMessage}>
-                  <Text style={styles.sendMessageButton}>Enviar</Text>
-                </TouchableOpacity>
+                <View style={styles.messageInputContainer}>
+                  <TextInput
+                    style={styles.messageInput}
+                    placeholder="Escribe un mensaje..."
+                    value={newMessage}
+                    onChangeText={(text) => setNewMessage(text)}
+                  />
+                  <TouchableOpacity onPress={handleSendMessage}>
+                    <Text style={styles.sendMessageButton}>Enviar</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
+              {/* <View style={styles.spaceButton}>
+                <PrincipalButton 
+                  title="Cerrar" 
+                  onPress={() => navigation.navigate("Closed")}
+                />
+                <PrincipalButton 
+                  title="Reabrir" 
+                  onPress={() => navigation.navigate("Closed")}
+                />
+              </View> */}
             </View>
           )}
         </View>

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
     backgroundColor: 'white',
-    width: 250,
+    width: 300,
     height: 150,
     borderRadius: 10,
 
@@ -23,10 +23,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    borderBottomLeftRadius: 10,
+    borderTopLeftRadius: 10,
   },
   rightPart: {
-
-    flex: 1,
+    flex: 1.4,
     justifyContent: 'center',
     paddingHorizontal: 10,
   },

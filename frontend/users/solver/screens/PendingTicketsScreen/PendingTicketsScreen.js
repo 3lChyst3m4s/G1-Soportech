@@ -8,15 +8,39 @@ import logo from "../../../../assets/images/logo.png";
 import Layout from "../../../../components/Layout";
 import styles from './styles';
 
-const PendingTicketScreen = ({ navigation }) => {
+const PendingTicketScreen = ({ route, navigation }) => {
+  const { solicitud } = route.params;
   const [searchText, setSearchText] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const [solicitudesData, setSolicitudesData] = useState([
+  const [incidentesData, setIncidentesData] = useState([
+    { id: 1, nombre: "Charlie", titulo: "Incidente A", fecha: "2023-09-15", estado: "Proceso" },
+    { id: 2, nombre: "David", titulo: "Incidente B", fecha: "2023-09-16", estado: "Proceso" },
+    { id: 3, nombre: "Eduardo", titulo: "Incidente C", fecha: "2023-09-17", estado: "Pendiente" },
+    { id: 4, nombre: "Fernando", titulo: "Incidente D", fecha: "2023-09-18", estado: "Proceso" },
+    { id: 5, nombre: "Gabriel", titulo: "Incidente E", fecha: "2023-09-19", estado: "Proceso" },
+    { id: 6, nombre: "Hernando", titulo: "Incidente F", fecha: "2023-09-20", estado: "Observado" },
+    { id: 7, nombre: "Ignacio", titulo: "Incidente G", fecha: "2023-09-21", estado: "Proceso" },
+    { id: 8, nombre: "Juan", titulo: "Incidente H", fecha: "2023-09-22", estado: "Observado" },
+    { id: 9, nombre: "Kevin", titulo: "Incidente I", fecha: "2023-09-23", estado: "Pendiente" },
+    { id: 10, nombre: "Luis", titulo: "Incidente J", fecha: "2023-09-24", estado: "Proceso"}
+  ]);
+  const [requerimientosData, setRequerimientosData] = useState([
     { id: 1, nombre: "Charlie", titulo: "Requerimiento A", fecha: "2023-09-15", estado: "Proceso" },
     { id: 2, nombre: "David", titulo: "Solicitud B", fecha: "2023-09-16", estado: "Proceso" },
+    { id: 3, nombre: "Eduardo", titulo: "Solicitud C", fecha: "2023-09-17", estado: "Pendiente" },
+    { id: 4, nombre: "Fernando", titulo: "Solicitud D", fecha: "2023-09-18", estado: "Proceso" },
+    { id: 5, nombre: "Gabriel", titulo: "Solicitud E", fecha: "2023-09-19", estado: "Proceso" },
   ]);
+
+  let solicitudesData;
+
+  if (solicitud == 'Incidentes') {
+    solicitudesData = incidentesData;
+  } else {
+    solicitudesData = requerimientosData;
+  }
 
   const [filteredData, setFilteredData] = useState(solicitudesData);
 
@@ -29,14 +53,22 @@ const PendingTicketScreen = ({ navigation }) => {
     const updatedData = solicitudesData.map((dataItem) =>
       dataItem.id === selectedItem.id ? { ...dataItem, estado: status } : dataItem
     );
-    setSolicitudesData(updatedData);
+    if (solicitud == 'Incidentes') {
+      setIncidentesData(updatedData);
+    } else {
+      setRequerimientosData(updatedData);
+    }
     setIsDropdownVisible(false);
+  };
+
+  const handleRowPress = (itemId) => {
+    navigation.navigate('Details', { itemId });
   };
 
   const renderTableRow = (item) => {
     if (searchText === "" || item.nombre.toLowerCase().includes(searchText.toLowerCase())) {
       return (
-        <View style={styles.tableRow} key={item.id}>
+        <TouchableOpacity onPress={() => handleRowPress(item.id)} style={styles.tableRow} key={item.id}>
           <Text style={[styles.tableCell, { width: 100 }]}>{item.nombre}</Text>
           <Text style={[styles.tableCell, { width: 200 }]}>{item.titulo}</Text>
           <Text style={[styles.tableCell, { width: 100 }]}>{item.fecha}</Text>
@@ -46,7 +78,7 @@ const PendingTicketScreen = ({ navigation }) => {
           >
             <Text>{item.estado}</Text>
           </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       );
     }
     return null;

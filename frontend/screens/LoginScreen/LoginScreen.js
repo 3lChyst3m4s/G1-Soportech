@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { View, Text, Image, TextInput, KeyboardAvoidingView, Pressable, Keyboard } from 'react-native';
+import { View, Text, Image, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 import styles from './styles';
 
@@ -37,7 +37,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    
+    <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
       <View style={styles.container}>
         <View style={styles.square}></View>
         <Text style={styles.supportechText}>
@@ -86,8 +86,8 @@ const LoginScreen = ({ navigation }) => {
           </View>
         </KeyboardAvoidingView>
       </View>
-    
-  );
+    </TouchableWithoutFeedback>
+  )
 };
 
 export default LoginScreen;

@@ -17,7 +17,6 @@ const SolverNavigator = () => {
       screenOptions={{ headerShown: false }}
     >
       <SolverStack.Screen name="Home" component={HomeScreen} />
-      <SolverStack.Screen name="Create" component={NewTicketScreen} />
       <SolverStack.Screen name="Pending" component={PendingTicketsScreen} />
       <SolverStack.Screen name="Details" component={TicketDetailsScreen} />
       <SolverStack.Screen name="Closed" component={ClosedTicketsScreen} />
