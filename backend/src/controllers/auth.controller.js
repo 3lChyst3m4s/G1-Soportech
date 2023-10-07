@@ -17,7 +17,7 @@ export const register = async (req, res) => {
       phone: "987654321",
       address: "TestAddress",
       city: "TestCity",
-      roleId: 1,
+      roleId: 2,
     });
 
     const userSaved = await newUser.save();
@@ -59,6 +59,7 @@ export const login = async (req, res) => {
       phone: userFound.phone,
       address: userFound.address,
       city: userFound.city,
+      roleId: userFound.roleId,
       createdAt: userFound.createdAt,
       updatedAt: userFound.updatedAt,
     });

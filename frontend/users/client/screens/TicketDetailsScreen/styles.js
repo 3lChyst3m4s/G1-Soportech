@@ -24,6 +24,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  activeTabText: {
+    color: '#000', // Color del texto cuando la pestaña está activa
+    fontWeight: 'bold', // Fuente en negrita para indicar que está seleccionada
+    fontSize: 16,
+    padding: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: '#000', // Línea de abajo cuando la pestaña está activa
+  },  
   statusText: {
     color: "white",
     fontWeight: "light",

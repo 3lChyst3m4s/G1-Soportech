@@ -14,7 +14,9 @@ const PendingTicketScreen = ({ navigation }) => {
     { id: 4, nombre: "Grace", titulo: "Requerimiento D", fecha: "2023-09-18" },
   ];
 
-
+  const handleRowPress = (itemId) => {
+    navigation.navigate('Details', { itemId });
+  };
 
   const renderTableRow = (item) => (
     <TouchableOpacity onPress={() => handleRowPress(item.id)} style={styles.tableRow}>
