@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, FlatList, TextInput } from 'react-native'
 import Layout from "../../../../components/Layout";
 import styles from './styles';
 
-const TicketDetailsScreen = ({ route }) => {
+const TicketDetailsScreen = ({ route, navigation }) => {
   const { itemId } = route.params;
   const [activeTab, setActiveTab] = useState('informacion');
 
@@ -31,6 +31,7 @@ const TicketDetailsScreen = ({ route }) => {
 
   return (
     <Layout
+      navigation={navigation}
       title="Detalles de la Consulta"
       screen={
         <View style={styles.container}>
