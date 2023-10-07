@@ -21,7 +21,7 @@ const RegisterScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigation.navigate("Login");
+      navigation.push("Login");
     }
   }, [isAuthenticated]);
 

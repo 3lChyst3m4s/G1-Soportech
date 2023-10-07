@@ -5,12 +5,13 @@ import Header from './Header';
 import Footer from './Footer';
 
 import NavButton from './NavButton';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth, AuthContext } from '../context/AuthContext';
 
 import colors from '../config/colors'
 
 const Layout = ({navigation, title, screen}) => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const { logout } = useAuth();
   const { user } = useContext(AuthContext);
   const userRole = user.roleId;
 
@@ -24,7 +25,9 @@ const Layout = ({navigation, title, screen}) => {
   }
 
   const logoutUser = () => {
-    goToScreen('Login');
+    setMenuVisible(false);
+    navigation.navigate('Auth', { screen: 'Login' });
+    logout();
   }
 
   return (

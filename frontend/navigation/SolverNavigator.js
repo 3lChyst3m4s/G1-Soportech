@@ -2,7 +2,6 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { HomeScreen } from '../users/solver/screens/HomeScreen'
-import { NewTicketScreen } from '../users/solver/screens/NewTicketScreen'
 import { PendingTicketsScreen } from '../users/solver/screens/PendingTicketsScreen'
 import { TicketDetailsScreen } from '../users/solver/screens/TicketDetailsScreen'
 import { ClosedTicketsScreen } from '../users/solver/screens/ClosedTicketsScreen'
