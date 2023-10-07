@@ -1,26 +1,19 @@
 import React, { useContext } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View } from 'react-native';
 
 import Layout from "../../../../components/Layout";
 import styles from './styles';
 
+import { NavButton } from "../../components/NavButton";
 import { AuthContext } from "../../../../context/AuthContext";
 
 const HomeScreen = ({navigation}) => {
   const { user } = useContext(AuthContext);
 
-  const NavButton = ({ title, onPress }) => {
-    return (
-      <TouchableOpacity style={styles.navButton} onPress={onPress}>
-        <Text style={styles.navButtonText}>{title}</Text>
-      </TouchableOpacity>
-    );
-  };
-
   return (
     <Layout 
       navigation={navigation}
-      title={user.username}
+      title={user.name}
       screen={
         <View style={styles.container}>
           <View style={styles.menu}>

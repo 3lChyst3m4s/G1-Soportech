@@ -12,7 +12,7 @@ import ola2 from '../../assets/images/ola2.png';
 
 const RegisterScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     email: '',
     password: ''
   });
@@ -21,7 +21,7 @@ const RegisterScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigation.navigate("login");
+      navigation.navigate("Login");
     }
   }, [isAuthenticated]);
 
@@ -55,8 +55,8 @@ const RegisterScreen = ({ navigation }) => {
           <TextInput
             placeholder="Nombre"
             style={[styles.input,styles.blueBorder]}
-            value={formData.username}
-            onChangeText={(text) => handleInputChange('username', text)}
+            value={formData.name}
+            onChangeText={(text) => handleInputChange('name', text)}
           />
           <TextInput
             placeholder="Email"

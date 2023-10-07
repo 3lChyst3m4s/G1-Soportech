@@ -1,33 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { ScrollView, View, Text, Image } from 'react-native';
 
 import Layout from '../../components/Layout'
 import styles from './styles';
 
-import { getUsers } from '../../Api';
+import { AuthContext } from "../../context/AuthContext";
 
 const ProfileScreen = ({ navigation }) => {
-  
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [phone, setPhone] = useState(null);
-  const [address, setAddress] = useState(null);
-  const [city, setCity] = useState(null);
-
-  const loadUser = async () => {
-    const data = await getUsers();
-    const fetchedUser = data[0];
-
-    setName(fetchedUser.name);
-    setEmail(fetchedUser.email);
-    setPhone(fetchedUser.phone);
-    setAddress(fetchedUser.address.street);
-    setCity(fetchedUser.address.city);
-  }
-
-  useEffect(() => {
-    loadUser();
-  }, [])
+  const { user } = useContext(AuthContext);
 
   const infoCell = (title, info) => {
     return (
@@ -41,18 +21,18 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <Layout 
       navigation={navigation}
-      title={name}
+      title={user.name}
       screen={
         <ScrollView contentContainerStyle={styles.container}>
           <Text style={styles.title}>Mi Perfil</Text>
 
           <View style={styles.infoContainer}>
             <Text style={styles.infoArea}>Información Personal</Text>
-            {infoCell('Nombre', name)}
-            {infoCell('Email', email)}
-            {infoCell('Teléfono', phone)}
-            {infoCell('Dirección', address)}
-            {infoCell('Ciudad', city)}
+            {infoCell('Nombre', user.name)}
+            {infoCell('Email', user.email)}
+            {infoCell('Teléfono', user.phone)}
+            {infoCell('Dirección', user.address)}
+            {infoCell('Ciudad', user.city)}
           </View>
 
           <View style={styles.infoContainer}>

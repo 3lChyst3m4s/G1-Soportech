@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   waveContainer: {
     position: 'absolute',
     left: -206,
-    bottom: -360,
+    bottom: -350,
     flexDirection: 'row',
   },
   waveImage: {

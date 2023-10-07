@@ -37,7 +37,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <Pressable onPress={() => {Keyboard.dismiss()}}>
+    
       <View style={styles.container}>
         <View style={styles.square}></View>
         <Text style={styles.supportechText}>
@@ -65,12 +65,13 @@ const LoginScreen = ({ navigation }) => {
             value={formData.password}
             onChangeText={(text) => handleInputChange('password', text)}
           />
-          <LoginButton
-            title="Iniciar Sesión"
+          <LoginButton 
             onPress={onSubmit}
           />
           <Text style={styles.forgotPassword}>¿Olvidaste tu contraseña?</Text>
-          <RegisterButton navigation={navigation}/>
+          <RegisterButton
+            onPress={() => navigation.navigate('Register')}
+          />
         </View>
         <KeyboardAvoidingView enabled>
           <View style={styles.waveContainer}>
@@ -85,7 +86,7 @@ const LoginScreen = ({ navigation }) => {
           </View>
         </KeyboardAvoidingView>
       </View>
-    </Pressable>
+    
   );
 };
 

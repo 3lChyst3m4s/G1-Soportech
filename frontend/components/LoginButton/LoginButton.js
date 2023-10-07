@@ -3,10 +3,10 @@ import React from 'react'
 
 import styles from './styles'
 
-const LoginButton = ({ title, onPress }) => {
+const LoginButton = ({ onPress }) => {
   return (
     <Pressable style={styles.loginButton} onPress={onPress}>
-      <Text style={styles.loginButtonText}>{title}</Text>
+      <Text style={styles.loginButtonText}>Iniciar Sesión</Text>
     </Pressable>
   );
 };

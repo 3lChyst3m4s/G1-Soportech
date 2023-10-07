@@ -5,11 +5,13 @@ import Header from './Header';
 import Footer from './Footer';
 
 import NavButton from './NavButton';
+import { useAuth } from '../context/AuthContext';
 
 import colors from '../config/colors'
 
 const Layout = ({navigation, title, screen}) => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const { logout } = useAuth();
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
@@ -18,6 +20,11 @@ const Layout = ({navigation, title, screen}) => {
   const goToScreen = (screenName) => {
       setMenuVisible(false);
       navigation.navigate(screenName);
+  }
+
+  const logoutUser = () => {
+    logout();
+    goToScreen('Login');
   }
 
   return (
@@ -32,7 +39,7 @@ const Layout = ({navigation, title, screen}) => {
             <NavButton title="Consultas Cerradas" icon="done" onPress={() => goToScreen('Closed')} />
             <View style={styles.sep}></View>
             <NavButton title="Mi Perfil" icon="person" onPress={() => goToScreen('Profile')} />
-            <NavButton title="Cerrar Sesion" icon="logout" onPress={() => goToScreen('Login')} />
+            <NavButton title="Cerrar Sesion" icon="logout" onPress={logoutUser} />
           </View>
         </View>
       )}
