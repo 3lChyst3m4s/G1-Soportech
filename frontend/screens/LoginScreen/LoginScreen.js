@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { View, Text, Image, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, Image, KeyboardAvoidingView } from 'react-native';
 
 import styles from './styles';
 
 import { LoginButton } from '../../components/LoginButton';
 import { RegisterButton } from '../../components/RegisterButton';
+import { KeyboardAvoidingWrapper } from '../../components/KeyboardAvoidingWrapper';
+import { TInput } from '../../components/TInput';
 
 import logo from '../../assets/images/logo.png';
 import ola1 from '../../assets/images/ola1.png';
@@ -37,7 +39,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
+    <KeyboardAvoidingWrapper>
       <View style={styles.container}>
         <View style={styles.square}></View>
         <Text style={styles.supportechText}>
@@ -52,16 +54,18 @@ const LoginScreen = ({ navigation }) => {
           {loginErrors.map((error, index) => (
             <Text key={index} style={styles.errorText}>{error}</Text>
           ))}
-          <TextInput
-            placeholder="Email"
-            style={[styles.input, styles.blueBorder]}
+          <TInput
+            nameMenu={'email'}
+            title={'Correo electrónico'}
+            placeholder="joealwyn@gmail.com"
             value={formData.email}
             onChangeText={(text) => handleInputChange('email', text)}
           />
-          <TextInput
-            placeholder="Contraseña"
+          <TInput
+            nameMenu={'lock'}
+            title={'Contraseña'}
+            placeholder="********"
             secureTextEntry={true}
-            style={[styles.input, styles.blueBorder]}
             value={formData.password}
             onChangeText={(text) => handleInputChange('password', text)}
           />
@@ -70,10 +74,10 @@ const LoginScreen = ({ navigation }) => {
           />
           <Text style={styles.forgotPassword}>¿Olvidaste tu contraseña?</Text>
           <RegisterButton
-            onPress={() => navigation.navigate('Register')}
+            onPress={() => navigation.push('Register')}
           />
         </View>
-        <KeyboardAvoidingView enabled>
+        <KeyboardAvoidingView style={{zIndex: -1}} enabled>
           <View style={styles.waveContainer}>
             <Image
               source={ola2}
@@ -86,7 +90,7 @@ const LoginScreen = ({ navigation }) => {
           </View>
         </KeyboardAvoidingView>
       </View>
-    </TouchableWithoutFeedback>
+    </KeyboardAvoidingWrapper>
   )
 };
 

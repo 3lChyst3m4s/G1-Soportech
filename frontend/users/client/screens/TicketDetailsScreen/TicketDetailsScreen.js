@@ -1,10 +1,8 @@
 import React, {useState, useRef, useEffect} from "react";
 import { View, Text, TouchableOpacity, FlatList, TextInput } from 'react-native'
 
-import Layout from "../../../../components/Layout";
+import { Layout } from "../../../../components/Layout";
 import styles from './styles';
-
-import PrincipalButton from "../../../../components/PrincipalButton";
 
 const TicketDetailsScreen = ({ route, navigation }) => {
   const { itemId } = route.params;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import colors from '../config/colors' 
+import styles from './styles'
 
 const Footer = () => {
   return (
@@ -10,14 +10,5 @@ const Footer = () => {
     </View>
   );
 }
-
-const styles = {
-  square: {
-    height: 35,
-    backgroundColor: colors.primary,
-    borderWidth: 2,
-    borderColor: colors.primary,
-  },
-};
 
 export default Footer;

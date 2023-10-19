@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   square: {
-    width: 412,
-    height: 35,
+    position: 'absolute',
+    width: '100%',
+    height: 45,
+    top: 0,
     backgroundColor: colors.secondary,
-    borderWidth: 2,
-    borderColor: colors.secondary,
   },
   supportechText: {
     fontSize: 30,
@@ -52,16 +52,17 @@ const styles = StyleSheet.create({
     color: colors.primary,
     marginBottom: 10,
   },
-  // Wave styles
   waveContainer: {
+    zIndex: -1,
+    left: '-50%',
+    height: 300,
+    width: '100%',
     position: 'absolute',
-    left: -206,
-    bottom: -350,
-    flexDirection: 'row',
   },
   waveImage: {
-    width: 412,
-    height: 300,
+    opacity: 0.9,
+    width: '100%',
+    height: '100%',
   },
   secondWave: {
     position: 'absolute',

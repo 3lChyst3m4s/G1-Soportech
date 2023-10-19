@@ -28,4 +28,4 @@ const Task = sequelize.define('Task', {
   timestamps: true,
 });
 
-module.exports = Task;
+export default Task;

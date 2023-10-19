@@ -13,13 +13,11 @@ const TypeRequest = sequelize.define('TypeRequest', {
     allowNull: false
   },
   description: {
-    type: DataTypes.STRING(50),
+    type: DataTypes.STRING,
     allowNull: false
   },
-  globalTime: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
+}, {
+  timestamps: false,
 });
 
-module.exports = TypeRequest;
+export default TypeRequest;

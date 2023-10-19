@@ -13,9 +13,11 @@ const StateRequest = sequelize.define('StateRequest', {
     allowNull: false
   },
   description: {
-    type: DataTypes.STRING(50),
+    type: DataTypes.STRING,
     allowNull: false
   },
+}, {
+  timestamps: false,
 });
 
-module.exports = StateRequest;
+export default StateRequest;

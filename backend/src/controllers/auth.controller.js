@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { createAccessToken } from "../lib/jwt.js";
 
 export const register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, phone, address, city, roleId } = req.body;
   try {
     const userFound = await User.findOne({ where: { email } });
     if (userFound) return res.status(400).json(["The email already exists"]);
@@ -14,10 +14,10 @@ export const register = async (req, res) => {
       name,
       email,
       password: passwordHash,
-      phone: "987654321",
-      address: "TestAddress",
-      city: "TestCity",
-      roleId: 2,
+      phone,
+      address,
+      city,
+      roleId,
     });
 
     const userSaved = await newUser.save();

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { View, Text, TextInput, FlatList } from "react-native";
-import Layout from "../../../../components/Layout";
+import { Layout } from "../../../../components/Layout";
 import styles from './styles';
 
 const ClosedTicketsScreen = ({ navigation }) => {

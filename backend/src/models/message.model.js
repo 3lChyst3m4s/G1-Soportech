@@ -23,8 +23,14 @@ const Message = sequelize.define('Message', {
   },
   messageTime: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   },
-});
+}, {
+  timestamps: false,
+}
+);
 
-module.exports = Message;
+Message.belongsTo(User, { foreignKey: 'userId' });
+
+export default Message;

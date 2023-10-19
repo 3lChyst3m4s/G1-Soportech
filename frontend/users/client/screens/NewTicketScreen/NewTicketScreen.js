@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { View, TouchableOpacity, Text, TextInput, Modal, FlatList } from 'react-native';
 import Icon from "react-native-vector-icons/SimpleLineIcons";
 
-import Layout from "../../../../components/Layout";
+import { Layout } from "../../../../components/Layout";
 import styles from './styles';
 import PrincipalButton from '../../../../components/PrincipalButton';
 

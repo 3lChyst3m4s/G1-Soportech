@@ -26,6 +26,15 @@ const Connection = sequelize.define('Connection', {
       key: 'categoryId'
     }
   },
+  quoteTime: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+}, {
+  timestamps: false,
 });
 
-module.exports = Connection;
+Connection.belongsTo(TypeRequest, { foreignKey: 'typeId' });
+Connection.belongsTo(CategoryRequest, { foreignKey: 'categoryId' });
+
+export default Connection;

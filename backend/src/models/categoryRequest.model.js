@@ -14,9 +14,11 @@ const CategoryRequest = sequelize.define('CategoryRequest', {
     allowNull: false
   },
   description: {
-    type: DataTypes.STRING(50),
+    type: DataTypes.STRING,
     allowNull: false
   },
+}, {
+  timestamps: false,
 });
 
-module.exports = CategoryRequest;
+export default CategoryRequest;

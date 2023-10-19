@@ -6,7 +6,7 @@ const PORT = server.port;
 
 const startServer = async () => {
   try {
-    await sequelize.sync();
+    await sequelize.sync({ force: false });
     console.log('Base de datos sincronizada');
     
     app.listen(PORT, () => {

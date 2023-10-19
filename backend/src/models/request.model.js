@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 import User from './user.model';
+import Log from './log.model';
 import Connection from './connection.model';
 import StateRequest from './stateRequest.model';
 import ConditionRequest from './conditionRequest.model';
@@ -12,7 +13,15 @@ const Request = sequelize.define('Request', {
     autoIncrement: true,
     allowNull: false
   },
-  userId: {
+  clientId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: User,
+      key: 'userId'
+    }
+  },
+  resolutorId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -44,19 +53,28 @@ const Request = sequelize.define('Request', {
     type: DataTypes.STRING(250),
     allowNull: false
   },
+  endTime: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  classroom: {
+    type: DataTypes.STRING(50),
+    allowNull: false
+  },
+  logId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Log,
+      key: 'logId'
+    }
+  },
   startTime: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   },
-  pendingTime: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  updateTime: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  endTime: {
+  closedTime: {
     type: DataTypes.DATE,
     allowNull: false
   },
@@ -68,6 +86,19 @@ const Request = sequelize.define('Request', {
       key: 'conditionId'
     }
   },
+  answerForm: {
+    type: DataTypes.STRING(250),
+    allowNull: true
+  },
+}, {
+  timestamps: false,
 });
 
-module.exports = Request;
+Request.belongsTo(User, { foreignKey: 'clientId' });
+Request.belongsTo(User, { foreignKey: 'resolutorId' });
+Request.belongsTo(Connection, { foreignKey: 'connectionId' });
+Request.belongsTo(StateRequest, { foreignKey: 'stateId' });
+Request.belongsTo(Log, { foreignKey: 'logId' });
+Request.belongsTo(ConditionRequest, { foreignKey: 'conditionId' });
+
+export default Request;

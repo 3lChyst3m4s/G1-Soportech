@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View } from 'react-native';
 
-import Layout from "../../../../components/Layout";
+import { Layout } from "../../../../components/Layout";
 import styles from './styles';
 
 import { NavButton } from "../../components/NavButton";

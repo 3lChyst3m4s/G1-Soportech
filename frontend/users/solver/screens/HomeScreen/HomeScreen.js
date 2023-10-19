@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, TouchableOpacity, Image, Text } from 'react-native';
 
-import Layout from "../../../../components/Layout";
+import { Layout } from "../../../../components/Layout";
 import styles from './styles';
 
 import logo from '../../../../assets/images/logo.png';

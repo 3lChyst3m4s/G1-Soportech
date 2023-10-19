@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { ScrollView, View, Text, Image } from 'react-native';
 
-import Layout from '../../components/Layout'
+import { Layout } from '../../components/Layout'
 import styles from './styles';
 
 import { AuthContext } from "../../context/AuthContext";

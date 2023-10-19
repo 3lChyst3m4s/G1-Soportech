@@ -13,9 +13,11 @@ const ConditionRequest = sequelize.define('ConditionRequest', {
     allowNull: false
   },
   description: {
-    type: DataTypes.STRING(50),
+    type: DataTypes.STRING,
     allowNull: false
   },
+}, {
+  timestamps: false,
 });
 
-module.exports = ConditionRequest;
+export default ConditionRequest;

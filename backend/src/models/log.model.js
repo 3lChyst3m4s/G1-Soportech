@@ -17,6 +17,10 @@ const Log = sequelize.define('Log', {
       key: 'messageId'
     }
   },
+}, {
+  timestamps: false,
 });
 
-module.exports = Log;
+Log.belongsTo(Message, { foreignKey: 'messageId' });
+
+export default Log;
