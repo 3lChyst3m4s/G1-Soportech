@@ -1,6 +1,7 @@
 import app from "./app";
 import { sequelize } from "./database";
 import { server } from "./config";
+import { Role } from "./models/role.model";
 
 const PORT = server.port;
 

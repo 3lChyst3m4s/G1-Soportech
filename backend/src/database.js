@@ -1,3 +1,4 @@
+import mysql from 'mysql2/promise';
 import Sequelize from 'sequelize';
 import { database } from './config.js';
 
@@ -7,3 +8,7 @@ export const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfi
   host: dbConfig.host,
   dialect: 'mysql',
 });
+
+export const connect = async () => {
+  return await mysql.createConnection(dbConfig);
+};

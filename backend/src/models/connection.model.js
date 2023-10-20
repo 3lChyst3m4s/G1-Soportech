@@ -27,7 +27,7 @@ const Connection = sequelize.define('Connection', {
     }
   },
   quoteTime: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: false
   },
 }, {

@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 import User from './user.model';
+import Log from './log.model';
 
 const Message = sequelize.define('Message', {
   messageId: {
@@ -8,6 +9,14 @@ const Message = sequelize.define('Message', {
     primaryKey: true,
     autoIncrement: true,
     allowNull: false
+  },
+  logId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Log,
+      key: 'logId'
+    }
   },
   userId: {
     type: DataTypes.INTEGER,
@@ -21,7 +30,7 @@ const Message = sequelize.define('Message', {
     type: DataTypes.STRING(250),
     allowNull: false
   },
-  messageTime: {
+  sentTime: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW
@@ -31,6 +40,7 @@ const Message = sequelize.define('Message', {
 }
 );
 
+Message.belongsTo(Log, { foreignKey: 'logId' });
 Message.belongsTo(User, { foreignKey: 'userId' });
 
 export default Message;

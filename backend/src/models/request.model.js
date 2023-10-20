@@ -1,7 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 import User from './user.model';
-import Log from './log.model';
 import Connection from './connection.model';
 import StateRequest from './stateRequest.model';
 import ConditionRequest from './conditionRequest.model';
@@ -23,7 +22,7 @@ const Request = sequelize.define('Request', {
   },
   resolutorId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
     references: {
       model: User,
       key: 'userId'
@@ -50,7 +49,7 @@ const Request = sequelize.define('Request', {
     allowNull: false
   },
   description: {
-    type: DataTypes.STRING(250),
+    type: DataTypes.STRING,
     allowNull: false
   },
   endTime: {
@@ -61,14 +60,6 @@ const Request = sequelize.define('Request', {
     type: DataTypes.STRING(50),
     allowNull: false
   },
-  logId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Log,
-      key: 'logId'
-    }
-  },
   startTime: {
     type: DataTypes.DATE,
     allowNull: false,
@@ -76,7 +67,7 @@ const Request = sequelize.define('Request', {
   },
   closedTime: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: true
   },
   conditionId: {
     type: DataTypes.INTEGER,
@@ -98,7 +89,6 @@ Request.belongsTo(User, { foreignKey: 'clientId' });
 Request.belongsTo(User, { foreignKey: 'resolutorId' });
 Request.belongsTo(Connection, { foreignKey: 'connectionId' });
 Request.belongsTo(StateRequest, { foreignKey: 'stateId' });
-Request.belongsTo(Log, { foreignKey: 'logId' });
 Request.belongsTo(ConditionRequest, { foreignKey: 'conditionId' });
 
 export default Request;

@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
-import Message from './message.model';
+import User from './user.model';
+import Request from './request.model';
 
 const Log = sequelize.define('Log', {
   logId: {
@@ -9,18 +10,36 @@ const Log = sequelize.define('Log', {
     autoIncrement: true,
     allowNull: false
   },
-  messageId: {
+  requestId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: Message,
-      key: 'messageId'
+      model: Request,
+      key: 'requestId'
+    }
+  },
+  clientId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: User,
+      key: 'userId'
+    }
+  },
+  resolutorId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: User,
+      key: 'userId'
     }
   },
 }, {
   timestamps: false,
 });
 
-Log.belongsTo(Message, { foreignKey: 'messageId' });
+Log.belongsTo(Request, { foreignKey: 'requestId' });
+Log.belongsTo(User, { foreignKey: 'clientId' });
+Log.belongsTo(User, { foreignKey: 'resolutorId' });
 
 export default Log;
