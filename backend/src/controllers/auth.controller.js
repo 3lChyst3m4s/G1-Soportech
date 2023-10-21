@@ -59,6 +59,7 @@ export const login = async (req, res) => {
       phone: userFound.phone,
       address: userFound.address,
       city: userFound.city,
+      roleId: userFound.roleId,
       createdAt: userFound.createdAt,
       updatedAt: userFound.updatedAt,
     });

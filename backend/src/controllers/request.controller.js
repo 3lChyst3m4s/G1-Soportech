@@ -4,11 +4,13 @@ export const createRequest = async (req, res) => {
   const { title, description, endTime, classroom } = req.body;
   const { id } = req.user;
 
+  const formattedEndTime = moment(endTime).format('YYYY-MM-DD HH:mm:ss');
+
   try {
     const request = await Request.create({
       title,
       description,
-      endTime,
+      endTime: formattedEndTime,
       classroom,
       userId: id,
     });

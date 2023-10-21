@@ -8,9 +8,11 @@ import PrincipalButton from '../../../../components/PrincipalButton';
 
 const NewTicketScreen = ({ navigation }) => {
   const [selectedButton, setSelectedButton] = useState(null);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [isModalVisible, setModalVisible] = useState(false);
+  const [classroom, setClassroom] = useState("");
+  const [date, setDate] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
 
   const options = [
@@ -27,7 +29,7 @@ const NewTicketScreen = ({ navigation }) => {
         <Icon name="arrow-down" size={15} color="#000" />
       </TouchableOpacity>
     );
-  }
+  };
 
   function dropDown() {
     setModalVisible(true);
@@ -35,12 +37,12 @@ const NewTicketScreen = ({ navigation }) => {
 
   const handleButtonPress = (buttonTitle) => {
     setSelectedButton(buttonTitle);
-  }
+  };
 
   const handleOptionPress = (option) => {
     setSelectedOption(option);
     setModalVisible(false);
-  }
+  };
 
   const renderOptionItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleOptionPress(item)}>
@@ -49,19 +51,19 @@ const NewTicketScreen = ({ navigation }) => {
   );
 
   return (
-    <Layout 
+    <Layout
       navigation={navigation}
       title="Nueva Consulta"
       screen={
         <View style={styles.container}>
-          <PrincipalButton 
-            title="Requerimiento" 
-            onPress={() => handleButtonPress("Requerimiento")} 
+          <PrincipalButton
+            title="Requerimiento"
+            onPress={() => handleButtonPress("Requerimiento")}
             selected={selectedButton === "Requerimiento"}
           />
-          <PrincipalButton 
-            title="Incidente" 
-            onPress={() => handleButtonPress("Incidente")} 
+          <PrincipalButton
+            title="Incidente"
+            onPress={() => handleButtonPress("Incidente")}
             selected={selectedButton === "Incidente"}
           />
           <TypeTicket text="Especifico" onPress={dropDown} />
@@ -69,17 +71,37 @@ const NewTicketScreen = ({ navigation }) => {
             style={styles.space1}
             placeholder="Titulo"
             value={title}
-            onChangeText={text => setTitle(text)}
+            onChangeText={(text) => setTitle(text)}
           />
+          <View style={styles.datosContainer}>
+            <View style={styles.space3}>
+              <Text style={styles.label}>Aula:</Text>
+              <TextInput
+                style = {styles.contenedor}
+                placeholder="105 - NP"
+                value={classroom}
+                onChangeText={(text) => setClassroom(text)}
+              />
+            </View>
+            <View style={styles.space3}>
+              <Text style={styles.label}>Fecha:</Text>
+              <TextInput
+                style = {styles.contenedor}
+                placeholder="12/10/2023"
+                value={date}
+                onChangeText={(text) => setDate(text)}
+              />
+            </View>
+          </View>
           <TextInput
             style={styles.space2}
             placeholder="Descripción"
             value={description}
-            onChangeText={text => setDescription(text)}
+            onChangeText={(text) => setDescription(text)}
           />
-          <PrincipalButton 
-            title="Enviar" 
-            onPress={() => navigation.navigate("Pending")} 
+          <PrincipalButton
+            title="Enviar"
+            onPress={() => navigation.navigate("Pending")}
             selected={selectedButton === "Enviar"}
           />
 
