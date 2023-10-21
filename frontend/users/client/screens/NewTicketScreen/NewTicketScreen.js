@@ -74,25 +74,33 @@ const NewTicketScreen = ({ navigation }) => {
             onChangeText={(text) => setTitle(text)}
           />
           <View style={styles.datosContainer}>
+            
             <View style={styles.space3}>
               <Text style={styles.label}>Aula:</Text>
               <TextInput
                 style = {styles.contenedor}
                 placeholder="105 - NP"
+                multiline={true}
+                numberOfLines={2}
                 value={classroom}
                 onChangeText={(text) => setClassroom(text)}
               />
             </View>
-            <View style={styles.space3}>
+
+            <View style={styles.space4}>
               <Text style={styles.label}>Fecha:</Text>
               <TextInput
                 style = {styles.contenedor}
                 placeholder="12/10/2023"
+                multiline={true}
+                numberOfLines={2}
                 value={date}
                 onChangeText={(text) => setDate(text)}
               />
             </View>
+
           </View>
+
           <TextInput
             style={styles.space2}
             placeholder="Descripción"

@@ -7,7 +7,7 @@ export const createRequestSchema = z.object({
   description: z.string({
     required_error: "Description must be a string",
   }),
-  endTime: z.string().datetime({
+  endTime: z.string({
     required_error: "End time is required",
   }),
   classroom: z.string({

@@ -3,15 +3,39 @@ import { View, Text, TouchableOpacity, FlatList, TextInput } from 'react-native'
 
 import { Layout } from "../../../../components/Layout";
 import styles from './styles';
+import { API } from '../../../../Api';
+
 
 const TicketDetailsScreen = ({ route, navigation }) => {
   const { itemId } = route.params;
+  const [title, setTitle] = useState('');
+  const [clientName, setClientName] = useState('');
+  const [classroom, setClassroom] = useState('');
+  const [description, setDescription] = useState('');
+  const [type, setType] = useState('');
+  const [category, setCategory] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [activeTab, setActiveTab] = useState('informacion');
   const flatListRef = useRef(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`${API}/requests/${itemId}`);
+      const data = await response.json();
+      setTitle(data.title);
+      setClientName(data.clientName);
+      setClassroom(data.classroom);
+      setDescription(data.description);
+      setType(data.typeRequest);
+      setCategory(data.categoryRequest);
+      setEndTime(data.endTime);
+    }
+    fetchData();
+  }, []);
+
   const [messages, setMessages] = useState([
     { id: 1, text: 'Hola, ¿en qué puedo ayudarte?', user: 'Soporte' },
-    { id: 2, text: 'Tengo un problema con...', user: 'Usuario' },
+    { id: 2, text: 'Tengo un problema con...', user: clientName },
   ]);
 
   const handleTabClick = (tab) => {
@@ -24,7 +48,7 @@ const TicketDetailsScreen = ({ route, navigation }) => {
     if (newMessage.trim() !== '') {
       setMessages([
         ...messages,
-        { id: messages.length + 1, text: newMessage, user: 'Usuario' },
+        { id: messages.length + 1, text: newMessage, user: clientName },
       ]);
       setNewMessage('');
     }
@@ -64,23 +88,27 @@ const TicketDetailsScreen = ({ route, navigation }) => {
             <View style={styles.ContainerInfo}>
               <View style={styles.titleContainer}>
                 <View style={styles.titleColumn}>
-                  <Text style={styles.title}>Título {itemId}</Text>
-                  <Text style={styles.subtitle}>Lorem Ipsum </Text>
+                  <Text style={styles.title}>Título</Text>
+                  <Text style={styles.subtitle}>{title}</Text>
+                  <Text style={styles.title}>Aula</Text>
+                  <Text style={styles.subtitle}>{classroom}</Text>
                   <Text style={styles.title}>Tipo</Text>
-                  <Text style={styles.subtitle}>Lorem Ipsum</Text>
+                  <Text style={styles.subtitle}>{type}</Text>
                   </View>
     
                 <View style={styles.titleColumn}>
                   <Text style={styles.title}>Usuario</Text>
-                  <Text style={styles.subtitle}>Lorem Ipsum</Text>
+                  <Text style={styles.subtitle}>{clientName}</Text>
+                  <Text style={styles.title}>Fecha</Text>
+                  <Text style={styles.subtitle}>{endTime}</Text>
                   <Text style={styles.title}>Categoría</Text>
-                  <Text style={styles.subtitle}>Lorem Ipsum</Text>
+                  <Text style={styles.subtitle}>{category}</Text>
                 </View>
               </View>      
             
               <View style={styles.titleColumn}>
               <Text style={styles.title}>Descripción</Text>
-                  <Text style={[styles.subtitle]}>Ea quis ullamco in veniam sunt. Esse anim labore qui tempor ut in non qui excepteur dolore Lorem occaecat.</Text>
+                  <Text style={[styles.subtitle]}>{description}</Text>
               </View>
             </View>
           )}
