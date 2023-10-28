@@ -46,7 +46,7 @@ const HomeScreen = ({navigation}) => {
       screen={
         <View style={styles.container}>
           <View style={styles.menu}>
-            {data && (
+            {data && data.length > 0 && (
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <View style={styles.tableContainer}>
                   <View style={styles.table}>

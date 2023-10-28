@@ -4,12 +4,11 @@ import { View, Text, TouchableOpacity, FlatList, TextInput } from 'react-native'
 import { Layout } from "../../../../components/Layout";
 import styles from './styles';
 import { API } from '../../../../Api';
-
-
 const TicketDetailsScreen = ({ route, navigation }) => {
   const { itemId } = route.params;
   const [title, setTitle] = useState('');
   const [clientName, setClientName] = useState('');
+  const [solverName, setsolverName] = useState('');
   const [classroom, setClassroom] = useState('');
   const [description, setDescription] = useState('');
   const [type, setType] = useState('');
@@ -20,23 +19,33 @@ const TicketDetailsScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${API}/requests/${itemId}`);
-      const data = await response.json();
-      setTitle(data.title);
-      setClientName(data.clientName);
-      setClassroom(data.classroom);
-      setDescription(data.description);
-      setType(data.typeRequest);
-      setCategory(data.categoryRequest);
-      setEndTime(data.endTime);
+      const request = await fetch(`${API}/requests/${itemId}`);
+
+      const dataRequest = await request.json();
+
+      setTitle(dataRequest.title);
+      setClientName(dataRequest.clientName);
+      setsolverName(dataRequest.solverName);
+      setClassroom(dataRequest.classroom);
+      setDescription(dataRequest.description);
+      setType(dataRequest.typeRequest);
+      setCategory(dataRequest.categoryRequest);
+      setEndTime(dataRequest.endTime);
     }
     fetchData();
   }, []);
 
-  const [messages, setMessages] = useState([
-    { id: 1, text: 'Hola, ¿en qué puedo ayudarte?', user: 'Soporte' },
-    { id: 2, text: 'Tengo un problema con...', user: clientName },
-  ]);
+  const getMessages = async () => {
+    const log = await fetch(`${API}/logs/${itemId}`);
+    const { logId } = await log.json();
+
+    const messages = await fetch(`${API}/messages/${logId}`);
+    const data = await messages.json();
+
+    return data;
+  }
+
+  const [messages, setMessages] = useState(getMessages());
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);

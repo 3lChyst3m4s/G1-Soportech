@@ -4,7 +4,8 @@ import { View, TouchableOpacity, Image, Text } from 'react-native';
 import { Layout } from "../../../../components/Layout";
 import styles from './styles';
 
-import logo from '../../../../assets/images/logo.png';
+import incidente from '../../../../assets/images/problema.png';
+import requerimiento from '../../../../assets/images/escritura.png';
 import { AuthContext } from "../../../../context/AuthContext";
 
 const HomeScreen = ({navigation}) => {
@@ -22,7 +23,7 @@ const HomeScreen = ({navigation}) => {
         <View style={styles.container}>
           <TouchableOpacity style={styles.button} onPress={() => handleNavigate('Incidentes')}>
             <View style={styles.leftPart}>
-              <Image source={logo}  style={[styles.icon, { tintColor: 'white' }]} />
+              <Image source={incidente}  style={[styles.icon, { tintColor: 'white' }]} />
             </View>
             <View style={styles.rightPart}>
               <Text style={styles.number}>10</Text>
@@ -32,7 +33,7 @@ const HomeScreen = ({navigation}) => {
           <View style={styles.separator} />
           <TouchableOpacity style={styles.button} onPress={() => handleNavigate('Requerimientos')}>
             <View style={styles.leftPart}>
-              <Image source={logo}  style={[styles.icon, { tintColor: 'white' }]} />
+              <Image source={requerimiento}  style={[styles.icon, { tintColor: 'white' }]} />
             </View>
             <View style={styles.rightPart}>
               <Text style={styles.number}>5</Text>

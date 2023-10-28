@@ -1,4 +1,5 @@
 import Message from '../models/message.model';
+import Log from '../models/log.model';
 
 export const createMessage = async (req, res) => {
   const { logId, content } = req.body;
@@ -17,12 +18,12 @@ export const createMessage = async (req, res) => {
 };
 
 export const getMessages = async (req, res) => {
-  const { ticketId } = req.params;
+  const { logId } = req.params;
 
   try {
     const messages = await Message.findAll({
       where: {
-        ticketId,
+        logId,
       },
     });
     res.status(200).json(messages);

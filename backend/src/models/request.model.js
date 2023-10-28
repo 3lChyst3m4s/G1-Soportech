@@ -20,7 +20,7 @@ const Request = sequelize.define('Request', {
       key: 'userId'
     }
   },
-  resolutorId: {
+  solverId: {
     type: DataTypes.INTEGER,
     allowNull: true,
     references: {
@@ -86,7 +86,7 @@ const Request = sequelize.define('Request', {
 });
 
 Request.belongsTo(User, { foreignKey: 'clientId' });
-Request.belongsTo(User, { foreignKey: 'resolutorId' });
+Request.belongsTo(User, { foreignKey: 'solverId' });
 Request.belongsTo(Connection, { foreignKey: 'connectionId' });
 Request.belongsTo(StateRequest, { foreignKey: 'stateId' });
 Request.belongsTo(ConditionRequest, { foreignKey: 'conditionId' });

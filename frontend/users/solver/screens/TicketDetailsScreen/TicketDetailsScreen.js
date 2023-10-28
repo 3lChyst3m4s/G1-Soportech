@@ -63,6 +63,7 @@ const TicketDetailsScreen = ({ route, navigation }) => {
           </View>
 
           {activeTab === 'informacion' && (
+          <View>
             <View style={styles.ContainerInfo}>
               <View style={styles.titleContainer}>
                 <View style={styles.titleColumn}>
@@ -85,6 +86,14 @@ const TicketDetailsScreen = ({ route, navigation }) => {
                   <Text style={[styles.subtitle]}>Ea quis ullamco in veniam sunt. Esse anim labore qui tempor ut in non qui excepteur dolore Lorem occaecat.</Text>
               </View>
             </View>
+
+            <View style={styles.spaceButton}>
+                <PrincipalButton 
+                  title="Tomar Caso" 
+                />
+              </View>
+
+          </View>
           )}
 
           {activeTab === 'log' && (
@@ -124,14 +133,17 @@ const TicketDetailsScreen = ({ route, navigation }) => {
                   </TouchableOpacity>
                 </View>
               </View>
+
               <View style={styles.spaceButton}>
                 <PrincipalButton 
                   title="Solucionar" 
                   onPress={() => navigation.navigate("Closed")}
                 />
               </View>
+
             </View>
           )}
+
         </View>
       }
     />

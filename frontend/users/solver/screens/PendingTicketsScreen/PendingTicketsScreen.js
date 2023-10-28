@@ -3,7 +3,8 @@ import { View, Text, Image, TextInput, Modal, TouchableOpacity } from 'react-nat
 
 import { ScrollView } from "react-native-gesture-handler";
 
-import logo from "../../../../assets/images/logo.png";
+import proceso from "../../../../assets/images/proceso.png";
+import observacion from "../../../../assets/images/observacion.png";
 
 import { Layout } from "../../../../components/Layout";
 import styles from './styles';
@@ -98,20 +99,9 @@ const PendingTicketScreen = ({ route, navigation }) => {
   return (
     <Layout 
       navigation={navigation}
-      title="Consultas Pendientes"
+      title="Estado de tickets"
       screen={
         <ScrollView style={styles.container}>
-          <View style={styles.statusContainer}>
-            <View style={styles.statusBox}>
-              <Text style={styles.statusText}>Abiertos</Text>
-            </View>
-
-            <View style={styles.space} />
-
-            <View style={styles.statusBox}>
-              <Text style={styles.statusText}>Resueltos</Text>
-            </View>
-          </View>
 
           <View style={styles.titleContainer}>
             <View style={styles.requirementBox}>
@@ -154,21 +144,15 @@ const PendingTicketScreen = ({ route, navigation }) => {
                   <ModalTitle title="Seleccione un estado" />
                   <View style={styles.modalContent}>
                   <OptionItem
-                    text="Pendiente"
-                    imageSource={logo}
-                    onPress={() => updateStatus("Pendiente")}
-                  />
+                    text="Proceso"
+                    imageSource={proceso}
+                    onPress={() => updateStatus("Proceso")}
+                  />                  
                   <OptionItem
                     text="Observado"
-                    imageSource={logo}
+                    imageSource={observacion}
                     onPress={() => updateStatus("Observado")}
                   />
-                  <OptionItem
-                    text="Proceso"
-                    imageSource={logo}
-                    onPress={() => updateStatus("Proceso")}
-                  />
-
                   </View>
                 </View>
               </Modal>

@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+    marginTop: 20,
   },
   statusContainer: {
     flexDirection: "row",
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: "#D8D8D8",
   },
   requirementTitle: {
     fontSize: 15,

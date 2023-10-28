@@ -7,15 +7,17 @@ import Request from '../models/request.model';
 import moment from 'moment';
 
 export const createRequest = async (req, res) => {
-  const { title, connectionId, description, endTime, classroom, stateId, conditionId } = req.body;
+  const { title, typeId, categoryId, description, endTime, classroom, stateId, conditionId } = req.body;
   const { userId } = req.user;
 
   const formattedEndTime = moment(endTime, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss');
 
   try {
+    const connection = await Connection.findOne({ where: { typeId, categoryId } });
+
     const request = await Request.create({
       clientId: userId,
-      connectionId,
+      connectionId: connection.dataValues.connectionId,
       stateId,
       title,
       description,
@@ -84,23 +86,30 @@ export const getRequest = async (req, res) => {
 
   try {
     const request = await Request.findByPk(id);
-    const clientId = request.dataValues.clientId;
-    const connectionId = request.dataValues.connectionId;
+    const { clientId, solverId, connectionId } = request.dataValues;
 
-    const connection = await Connection.findOne({ where: { connectionId } });
-    const typeId = connection.dataValues.typeId;
-    const categoryId = connection.dataValues.categoryId;
+    const { typeId, categoryId } = await Connection.findOne({ where: { connectionId } });
 
-    const typeRequest = await TypeRequest.findOne({ where: { typeId } });
-    const categoryRequest = await CategoryRequest.findOne({ where: { categoryId} });
+    const { name: nameType } = await TypeRequest.findOne({ where: { typeId } });
+    const { name: nameCategory } = await CategoryRequest.findOne({ where: { categoryId} });
 
-    const client = await User.findOne({ where: { userId: clientId } })
+    const { name: nameClient } = await User.findOne({ where: { userId: clientId } })
+    
+    let namesolver = '';
+
+    if (solverId) {
+      const { name: solverName } = await User.findOne({ where: { userId: solverId } });
+      namesolver = solverName; // Asigna el valor a namesolver
+    } else {
+      namesolver = 'Sin asignar';
+    }
 
     const formattedRequest = {
       ...request.dataValues,
-      clientName: client.dataValues.name,
-      typeRequest: typeRequest.dataValues.name,
-      categoryRequest: categoryRequest.dataValues.name,
+      clientName: nameClient,
+      solverName: namesolver,
+      typeRequest: nameType,
+      categoryRequest: nameCategory,
       endTime: moment(request.dataValues.endTime).format('DD/MM/YYYY'),
     };
 
@@ -126,22 +135,25 @@ export const deleteRequest = async (req, res) => {
 
 export const updateRequest = async (req, res) => {
   const { id } = req.params;
-  const { title, resolutorId, connectionId, description, endTime, classroom, stateId, conditionId } = req.body;
+  const { title, solverId, connectionId, description, endTime, classroom, stateId, conditionId } = req.body;
 
-  const formattedEndTime = moment(endTime, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss');
+  const updateFields = {};
+
+  if (title) updateFields.title = title;
+  if (solverId) updateFields.solverId = solverId;
+  if (connectionId) updateFields.connectionId = connectionId;
+  if (description) updateFields.description = description;
+  if (endTime) {
+    const formattedEndTime = moment(endTime, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss');
+    updateFields.endTime = formattedEndTime;
+  }
+  if (classroom) updateFields.classroom = classroom;
+  if (stateId) updateFields.stateId = stateId;
+  if (conditionId) updateFields.conditionId = conditionId;
 
   try {
     await Request.update(
-      {
-        title,
-        resolutorId,
-        connectionId,
-        description,
-        endTime: formattedEndTime,
-        classroom,
-        stateId,
-        conditionId,
-      },
+      updateFields,
       {
         where: {
           requestId: id,

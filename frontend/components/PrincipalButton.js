@@ -13,7 +13,7 @@ const PrincipalButton = ({ title, onPress, selected }) => {
 
 const styles = StyleSheet.create({
   principalButton: {
-    backgroundColor: colors.primary,
+    backgroundColor: "#2F58E9",
     width: 300,
     height: 40,
     justifyContent: 'center',
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   selectedPrincipalButton: {
-    backgroundColor: "#5d6AE0",
+    backgroundColor: colors.primary,
+    
   },
 });
 

@@ -48,12 +48,6 @@ const ProfileScreen = ({ navigation }) => {
             {infoCell('Seleccione su idioma preferido', 'Español')}
           </View>
 
-          <View style={styles.infoContainer}>
-            <Text style={styles.infoArea}>Contraseña</Text>
-            {infoCell('Antigua Contraseña', '---')}
-            {infoCell('Nueva Contraseña', '---')}
-            {infoCell('Confirmar Nueva', '---')}
-          </View>
         </ScrollView>
       }
     />

@@ -45,7 +45,7 @@ const ClosedTicketsScreen = ({ navigation }) => {
             <Text style={styles.filterText}>Filtro: </Text>
             <TextInput
               style={styles.filterInput}
-              placeholder="Buscar por nombre..."
+              placeholder="Buscar ticket ..."
               onChangeText={(text) => setSearchText(text)}
             />
           </View>

@@ -13,14 +13,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 10,
-    borderBottomWidth: 1,
-    borderColor: colors.primGray,
+    borderWidth: 2,
+    borderColor: "#D8D8D8",
     marginVertical: 10,
   },
   typeText: {
     color: '#000',
     fontSize: 16,
-    fontWeight: 'bold',
   },
   space1: {
     backgroundColor: colors.support,
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: 'bold',
     color: '#ffff',
-    backgroundColor: colors.primary,
+    backgroundColor: "#2F58E9",
     height: 40,
     padding:5,
     textAlignVertical: "center",
