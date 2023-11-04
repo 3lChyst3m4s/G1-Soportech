@@ -47,7 +47,6 @@ export const getRequests = async (req, res) => {
     
       const formattedRequests = await Promise.all(requests.map(async request => {
         const stateId = request.dataValues.stateId;
-        console.log(stateId);
         const stateRequest = await StateRequest.findOne({ where: { stateId } });
     
         return {

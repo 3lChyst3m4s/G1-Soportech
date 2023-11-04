@@ -43,7 +43,7 @@ const RegisterScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigation.push('Root', { screen: 'Home' });
+      navigation.navigate('Login');
     }
   }, [isAuthenticated]);
 

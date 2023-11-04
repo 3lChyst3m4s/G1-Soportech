@@ -39,47 +39,46 @@ const ClosedTicketsScreen = ({ navigation }) => {
     <Layout 
       navigation={navigation}
       title="Consultas Cerradas"
-      screen={
-        <View style={styles.container}>
-          <View style={styles.filterContainer}>
-            <Text style={styles.filterText}>Filtro: </Text>
-            <TextInput
-              style={styles.filterInput}
-              placeholder="Buscar ticket ..."
-              onChangeText={(text) => setSearchText(text)}
-            />
-          </View>
-
-          <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>Incidentes</Text>
-            <View style={styles.tableHeader}>
-              <Text style={styles.tableHeaderText}>Nombre</Text>
-              <Text style={styles.tableHeaderText}>Título</Text>
-              <Text style={styles.tableHeaderText}>Fecha</Text>
-            </View>
-            <FlatList
-              data={filteredIncidentesData}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => renderTableRow(item)}
-            />
-          </View>
-
-          <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>Requerimientos</Text>
-            <View style={styles.tableHeader}>
-              <Text style={styles.tableHeaderText}>Nombre</Text>
-              <Text style={styles.tableHeaderText}>Título</Text>
-              <Text style={styles.tableHeaderText}>Fecha</Text>
-            </View>
-            <FlatList
-              data={requerimientosData}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => renderTableRow(item)}
-            />
-          </View>
+    >
+      <View style={styles.container}>
+        <View style={styles.filterContainer}>
+          <Text style={styles.filterText}>Filtro: </Text>
+          <TextInput
+            style={styles.filterInput}
+            placeholder="Buscar ticket ..."
+            onChangeText={(text) => setSearchText(text)}
+          />
         </View>
-      }
-    />
+
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>Incidentes</Text>
+          <View style={styles.tableHeader}>
+            <Text style={styles.tableHeaderText}>Nombre</Text>
+            <Text style={styles.tableHeaderText}>Título</Text>
+            <Text style={styles.tableHeaderText}>Fecha</Text>
+          </View>
+          <FlatList
+            data={filteredIncidentesData}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => renderTableRow(item)}
+          />
+        </View>
+
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>Requerimientos</Text>
+          <View style={styles.tableHeader}>
+            <Text style={styles.tableHeaderText}>Nombre</Text>
+            <Text style={styles.tableHeaderText}>Título</Text>
+            <Text style={styles.tableHeaderText}>Fecha</Text>
+          </View>
+          <FlatList
+            data={requerimientosData}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => renderTableRow(item)}
+          />
+        </View>
+      </View>
+    </Layout>
   );
 }
 

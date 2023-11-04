@@ -7,7 +7,7 @@ import {
 
 const router = Router();
 
-router.get("/messages/:logId", authRequired, getMessages);
+router.get("/messages/:id", authRequired, getMessages);
 router.post("/messages", authRequired, createMessage);
 
 export default router;

@@ -7,7 +7,7 @@ import {
 
 const router = Router();
 
-router.get("/logs/:requestId", authRequired, getLog);
+router.get("/logs/:id", authRequired, getLog);
 router.post("/logs", authRequired, createLog);
 
 export default router;

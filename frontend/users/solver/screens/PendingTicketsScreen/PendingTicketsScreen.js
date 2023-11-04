@@ -100,67 +100,65 @@ const PendingTicketScreen = ({ route, navigation }) => {
     <Layout 
       navigation={navigation}
       title="Estado de tickets"
-      screen={
-        <ScrollView style={styles.container}>
-
-          <View style={styles.titleContainer}>
-            <View style={styles.requirementBox}>
-              <Text style={styles.requirementTitle}>Solicitudes de usuario</Text>
+    >
+      <ScrollView style={styles.container}>
+        <View style={styles.titleContainer}>
+          <View style={styles.requirementBox}>
+            <Text style={styles.requirementTitle}>Solicitudes de usuario</Text>
+          </View>
+          <View style={styles.filterContainer}>
+            <Text style={styles.filterText}>Filtro:</Text>
+            <TextInput
+              style={styles.filterInput}
+              placeholder="Buscar ticket ..."
+              onChangeText={(text) => {
+                setSearchText(text);
+                const filtered = solicitudesData.filter((item) =>
+                  item.nombre.toLowerCase().includes(text.toLowerCase())
+                );
+                setFilteredData(filtered);
+              }}
+            />
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.tableContainer}>
+              <View style={styles.table}>
+                <View style={styles.tableHeader}>
+                  <Text style={[styles.headerCell, { width: 100 }]}>Nombre</Text>
+                  <Text style={[styles.headerCell, { width: 200 }]}>Título</Text>
+                  <Text style={[styles.headerCell, { width: 100 }]}>Fecha</Text>
+                  <Text style={[styles.headerCell, { width: 100 }]}>Estado</Text>
+                </View>
+                {solicitudesData.map((item) => renderTableRow(item))}
+              </View>
             </View>
-            <View style={styles.filterContainer}>
-              <Text style={styles.filterText}>Filtro:</Text>
-              <TextInput
-                style={styles.filterInput}
-                placeholder="Buscar ticket ..."
-                onChangeText={(text) => {
-                  setSearchText(text);
-                  const filtered = solicitudesData.filter((item) =>
-                    item.nombre.toLowerCase().includes(text.toLowerCase())
-                  );
-                  setFilteredData(filtered);
-                }}
+          </ScrollView>
+          {isDropdownVisible && (
+            <Modal animationType="none" transparent={true} visible={isDropdownVisible}>
+              <TouchableOpacity
+                style={styles.modalOverlay}
+                onPress={() => setIsDropdownVisible(false)}
               />
-            </View>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <View style={styles.tableContainer}>
-                <View style={styles.table}>
-                  <View style={styles.tableHeader}>
-                    <Text style={[styles.headerCell, { width: 100 }]}>Nombre</Text>
-                    <Text style={[styles.headerCell, { width: 200 }]}>Título</Text>
-                    <Text style={[styles.headerCell, { width: 100 }]}>Fecha</Text>
-                    <Text style={[styles.headerCell, { width: 100 }]}>Estado</Text>
-                  </View>
-                  {solicitudesData.map((item) => renderTableRow(item))}
+              <View style={styles.modalContainer}>
+                <ModalTitle title="Seleccione un estado" />
+                <View style={styles.modalContent}>
+                <OptionItem
+                  text="Proceso"
+                  imageSource={proceso}
+                  onPress={() => updateStatus("Proceso")}
+                />                  
+                <OptionItem
+                  text="Observado"
+                  imageSource={observacion}
+                  onPress={() => updateStatus("Observado")}
+                />
                 </View>
               </View>
-            </ScrollView>
-            {isDropdownVisible && (
-              <Modal animationType="none" transparent={true} visible={isDropdownVisible}>
-                <TouchableOpacity
-                  style={styles.modalOverlay}
-                  onPress={() => setIsDropdownVisible(false)}
-                />
-                <View style={styles.modalContainer}>
-                  <ModalTitle title="Seleccione un estado" />
-                  <View style={styles.modalContent}>
-                  <OptionItem
-                    text="Proceso"
-                    imageSource={proceso}
-                    onPress={() => updateStatus("Proceso")}
-                  />                  
-                  <OptionItem
-                    text="Observado"
-                    imageSource={observacion}
-                    onPress={() => updateStatus("Observado")}
-                  />
-                  </View>
-                </View>
-              </Modal>
-            )}
-          </View>
-        </ScrollView>
-      }
-    />
+            </Modal>
+          )}
+        </View>
+      </ScrollView>
+    </Layout>
   );
 }
 

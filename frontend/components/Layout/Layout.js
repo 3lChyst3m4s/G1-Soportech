@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View } from 'react-native';
+import { View, KeyboardAvoidingView } from 'react-native';
 
 import { Header } from '../Header';
 import { Footer } from '../Footer';
@@ -10,7 +10,7 @@ import { useAuth, AuthContext } from '../../context/AuthContext';
 
 import styles from './styles'
 
-const Layout = ({navigation, title, screen}) => {
+const Layout = ({navigation, title, children }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const { logout } = useAuth();
   const { user } = useContext(AuthContext);
@@ -56,10 +56,21 @@ const Layout = ({navigation, title, screen}) => {
                 <NavButton title="Cerrar Sesion" icon="logout" onPress={logoutUser} />
               </View>
             )}
+            {userRole === 3 && (
+              <View style={styles.menu}>
+                <NavButton title="Inicio" icon="home" onPress={() => goToScreen('Home')} />
+                <NavButton title="Dashboard" icon="done" onPress={() => goToScreen('Dashboard')} />
+                <View style={styles.sep}></View>
+                <NavButton title="Mi Perfil" icon="person" onPress={() => goToScreen('Profile')} />
+                <NavButton title="Cerrar Sesion" icon="logout" onPress={logoutUser} />
+              </View>
+            )}
           </View>
         )}
-        {screen}
-        <Footer />
+        { children }
+        <KeyboardAvoidingView enabled>
+          <Footer />
+        </KeyboardAvoidingView>
       </View>
     </KeyboardAvoidingWrapper>
   );

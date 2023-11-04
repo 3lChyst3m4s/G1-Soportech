@@ -1,7 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { HomeScreen } from '../users/client/screens/HomeScreen'
+import { HomeScreen } from '../users/supervisor/screens/HomeScreen'
+import { DashboardScreen } from '../users/supervisor/screens/DashboardScreen'
+import { ProfileScreen } from '../screens/ProfileScreen'
 
 const SupervisorStack = createStackNavigator();
 
@@ -12,7 +14,10 @@ const SupervisorNavigator = () => {
       screenOptions={{ headerShown: false }}
     >
       <SupervisorStack.Screen name="Home" component={HomeScreen} />
+      <SupervisorStack.Screen name="Dashboard" component={DashboardScreen} />
+      <SupervisorStack.Screen name="Profile" component={ProfileScreen} />
     </SupervisorStack.Navigator>
+    
   );
 };
 

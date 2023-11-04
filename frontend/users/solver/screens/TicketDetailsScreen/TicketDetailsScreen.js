@@ -42,111 +42,110 @@ const TicketDetailsScreen = ({ route, navigation }) => {
     <Layout
       navigation={navigation}
       title="Detalles de la Consulta"
-      screen={
-        <View style={styles.container}>
-          <View style={styles.statusContainer}>
-            <TouchableOpacity onPress={() => handleTabClick('informacion')}>
-              <View style={activeTab === 'informacion' ? styles.activeTabBox : styles.statusBox}>
-                <Text style={activeTab === 'informacion' ? styles.activeTabText : styles.statusText}>
-                  Información
-                </Text>
-              </View>
-            </TouchableOpacity>
+    >
+      <View style={styles.container}>
+        <View style={styles.statusContainer}>
+          <TouchableOpacity onPress={() => handleTabClick('informacion')}>
+            <View style={activeTab === 'informacion' ? styles.activeTabBox : styles.statusBox}>
+              <Text style={activeTab === 'informacion' ? styles.activeTabText : styles.statusText}>
+                Información
+              </Text>
+            </View>
+          </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => handleTabClick('log')}>
-              <View style={activeTab === 'log' ? styles.activeTabBox : styles.statusBox}>
-                <Text style={activeTab === 'log' ? styles.activeTabText : styles.statusText}>
-                  Log Público
-                </Text>
+          <TouchableOpacity onPress={() => handleTabClick('log')}>
+            <View style={activeTab === 'log' ? styles.activeTabBox : styles.statusBox}>
+              <Text style={activeTab === 'log' ? styles.activeTabText : styles.statusText}>
+                Log Público
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        {activeTab === 'informacion' && (
+        <View>
+          <View style={styles.ContainerInfo}>
+            <View style={styles.titleContainer}>
+              <View style={styles.titleColumn}>
+                <Text style={styles.title}>Título {itemId}</Text>
+                <Text style={styles.subtitle}>Lorem Ipsum </Text>
+                <Text style={styles.title}>Tipo</Text>
+                <Text style={styles.subtitle}>Lorem Ipsum</Text>
+                </View>
+  
+              <View style={styles.titleColumn}>
+                <Text style={styles.title}>Usuario</Text>
+                <Text style={styles.subtitle}>Lorem Ipsum</Text>
+                <Text style={styles.title}>Categoría</Text>
+                <Text style={styles.subtitle}>Lorem Ipsum</Text>
               </View>
-            </TouchableOpacity>
+            </View>      
+          
+            <View style={styles.titleColumn}>
+            <Text style={styles.title}>Descripción</Text>
+                <Text style={[styles.subtitle]}>Ea quis ullamco in veniam sunt. Esse anim labore qui tempor ut in non qui excepteur dolore Lorem occaecat.</Text>
+            </View>
           </View>
 
-          {activeTab === 'informacion' && (
+          <View style={styles.spaceButton}>
+              <PrincipalButton 
+                title="Tomar Caso" 
+              />
+            </View>
+
+        </View>
+        )}
+
+        {activeTab === 'log' && (
           <View>
-            <View style={styles.ContainerInfo}>
-              <View style={styles.titleContainer}>
-                <View style={styles.titleColumn}>
-                  <Text style={styles.title}>Título {itemId}</Text>
-                  <Text style={styles.subtitle}>Lorem Ipsum </Text>
-                  <Text style={styles.title}>Tipo</Text>
-                  <Text style={styles.subtitle}>Lorem Ipsum</Text>
+            <View style={styles.ContainerLog}>
+              <FlatList
+                ref={flatListRef}
+                data={messages}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <View style={[
+                    styles.messageContainer,
+                    item.user === 'Soporte' ? styles.supportMessage : styles.userMessage
+                  ]}>
+                    <View style={styles.messageCont}>
+                      <Text style={[
+                        styles.messageUser,
+                        item.user === 'Soporte' ? styles.supportTitle : styles.userTitle
+                      ]}>
+                        {item.user}
+                      </Text>
+                      <Text style={styles.messageText}>{item.text}</Text>
+                    </View>
                   </View>
-    
-                <View style={styles.titleColumn}>
-                  <Text style={styles.title}>Usuario</Text>
-                  <Text style={styles.subtitle}>Lorem Ipsum</Text>
-                  <Text style={styles.title}>Categoría</Text>
-                  <Text style={styles.subtitle}>Lorem Ipsum</Text>
-                </View>
-              </View>      
-            
-              <View style={styles.titleColumn}>
-              <Text style={styles.title}>Descripción</Text>
-                  <Text style={[styles.subtitle]}>Ea quis ullamco in veniam sunt. Esse anim labore qui tempor ut in non qui excepteur dolore Lorem occaecat.</Text>
+                )}
+                onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
+              />
+              <View style={styles.messageInputContainer}>
+                <TextInput
+                  style={styles.messageInput}
+                  placeholder="Escribe un mensaje..."
+                  value={newMessage}
+                  onChangeText={(text) => setNewMessage(text)}
+                />
+                <TouchableOpacity onPress={handleSendMessage}>
+                  <Text style={styles.sendMessageButton}>Enviar</Text>
+                </TouchableOpacity>
               </View>
             </View>
 
             <View style={styles.spaceButton}>
-                <PrincipalButton 
-                  title="Tomar Caso" 
-                />
-              </View>
+              <PrincipalButton 
+                title="Solucionar" 
+                onPress={() => navigation.navigate("Closed")}
+              />
+            </View>
 
           </View>
-          )}
+        )}
 
-          {activeTab === 'log' && (
-            <View>
-              <View style={styles.ContainerLog}>
-                <FlatList
-                  ref={flatListRef}
-                  data={messages}
-                  keyExtractor={(item) => item.id.toString()}
-                  renderItem={({ item }) => (
-                    <View style={[
-                      styles.messageContainer,
-                      item.user === 'Soporte' ? styles.supportMessage : styles.userMessage
-                    ]}>
-                      <View style={styles.messageCont}>
-                        <Text style={[
-                          styles.messageUser,
-                          item.user === 'Soporte' ? styles.supportTitle : styles.userTitle
-                        ]}>
-                          {item.user}
-                        </Text>
-                        <Text style={styles.messageText}>{item.text}</Text>
-                      </View>
-                    </View>
-                  )}
-                  onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
-                />
-                <View style={styles.messageInputContainer}>
-                  <TextInput
-                    style={styles.messageInput}
-                    placeholder="Escribe un mensaje..."
-                    value={newMessage}
-                    onChangeText={(text) => setNewMessage(text)}
-                  />
-                  <TouchableOpacity onPress={handleSendMessage}>
-                    <Text style={styles.sendMessageButton}>Enviar</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-
-              <View style={styles.spaceButton}>
-                <PrincipalButton 
-                  title="Solucionar" 
-                  onPress={() => navigation.navigate("Closed")}
-                />
-              </View>
-
-            </View>
-          )}
-
-        </View>
-      }
-    />
+      </View>
+    </Layout>
   );
 }
 

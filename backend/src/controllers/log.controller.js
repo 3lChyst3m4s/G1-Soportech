@@ -2,13 +2,8 @@ import Log from "../models/log.model";
 import Request from "../models/request.model";
 
 export const createLog = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
   const { userId } = req.user;
-
-  console.log(req.params)
-
-  console.log(id);
-  console.log(userId);
 
   try {
     const { clientId } = await Request.findOne({ where: { requestId: id } });

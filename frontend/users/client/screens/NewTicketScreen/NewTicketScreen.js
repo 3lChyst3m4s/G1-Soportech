@@ -39,7 +39,7 @@ const NewTicketScreen = ({ navigation }) => {
 
   const onSubmit = () => {
     newRequest(requestData);
-    navigation.navigate("Home")
+    navigation.goBack();
   };
 
   const options = [
@@ -85,84 +85,84 @@ const NewTicketScreen = ({ navigation }) => {
     <Layout
       navigation={navigation}
       title="Nueva Consulta"
-      screen={
-        <View style={styles.container}>
-          <PrincipalButton
-            title="Requerimiento"
-            onPress={() => handleButtonPress("Requerimiento")}
-            selected={selectedButton === "Requerimiento"}
-          />
-          <PrincipalButton
-            title="Incidente"
-            onPress={() => handleButtonPress("Incidente")}
-            selected={selectedButton === "Incidente"}
-          />
-          <TypeTicket selectedOption={selectedOption} onPress={dropDown} />
-          <TextInput
-            style={styles.space1}
-            placeholder="Titulo"
-            value={requestData.title}
-            onChangeText={(text) => handleInputChange('title', text)}
-          />
-          <View style={styles.datosContainer}>
-            
-            <View style={styles.space3}>
-              <Text style={styles.label}>Aula:</Text>
-              <TextInput
-                style={styles.contenedor}
-                placeholder="105 - NP"
-                multiline={true}
-                numberOfLines={2}
-                value={requestData.classroom}
-                onChangeText={(text) => handleInputChange('classroom', text)}
-              />
-            </View>
-
-            <View style={styles.space4}>
-              <Text style={styles.label}>Fecha:</Text>
-              <TextInput
-                style={styles.contenedor}
-                placeholder="12/10/2023"
-                multiline={true}
-                numberOfLines={2}
-                value={requestData.endTime}
-                onChangeText={(text) => handleInputChange('endTime', text)}
-              />
-            </View>
-
+    >
+      <View style={styles.container}>
+        <PrincipalButton
+          title="Requerimiento"
+          onPress={() => handleButtonPress("Requerimiento")}
+          selected={selectedButton === "Requerimiento"}
+        />
+        <PrincipalButton
+          title="Incidente"
+          onPress={() => handleButtonPress("Incidente")}
+          selected={selectedButton === "Incidente"}
+        />
+        <TypeTicket selectedOption={selectedOption} onPress={dropDown} />
+        <TextInput
+          style={styles.space1}
+          placeholder="Titulo"
+          value={requestData.title}
+          onChangeText={(text) => handleInputChange('title', text)}
+        />
+        <View style={styles.datosContainer}>
+          
+          <View style={styles.space3}>
+            <Text style={styles.label}>Aula:</Text>
+            <TextInput
+              style={styles.contenedor}
+              placeholder="105 - NP"
+              multiline={true}
+              numberOfLines={2}
+              value={requestData.classroom}
+              onChangeText={(text) => handleInputChange('classroom', text)}
+            />
           </View>
 
-          <TextInput
-            style={styles.space2}
-            placeholder="Descripción"
-            value={requestData.description}
-            onChangeText={(text) => handleInputChange('description', text)}
-          />
-          <PrincipalButton
-            title="Enviar"
-            onPress={() => onSubmit()}
-            selected={selectedButton === "Enviar"}
-          />
+          <View style={styles.space4}>
+            <Text style={styles.label}>Fecha:</Text>
+            <TextInput
+              style={styles.contenedor}
+              placeholder="12/10/2023"
+              multiline={true}
+              numberOfLines={2}
+              value={requestData.endTime}
+              onChangeText={(text) => handleInputChange('endTime', text)}
+            />
+          </View>
 
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={isModalVisible}
-          >
-            <View style={styles.modalContainer}>
-              <FlatList
-                data={options}
-                keyExtractor={(item) => item.id}
-                renderItem={renderOptionItem}
-              />
-              <TouchableOpacity onPress={() => setModalVisible(false)}>
-                <Text style={styles.closeButton}>Cerrar</Text>
-              </TouchableOpacity>
-            </View>
-          </Modal>
         </View>
-      }
-    />
+
+        <TextInput
+          style={styles.space2}
+          placeholder="Descripción"
+          multiline={true}
+          value={requestData.description}
+          onChangeText={(text) => handleInputChange('description', text)}
+        />
+        <PrincipalButton
+          title="Enviar"
+          onPress={() => onSubmit()}
+          selected={selectedButton === "Enviar"}
+        />
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={isModalVisible}
+        >
+          <View style={styles.modalContainer}>
+            <FlatList
+              data={options}
+              keyExtractor={(item) => item.id}
+              renderItem={renderOptionItem}
+            />
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <Text style={styles.closeButton}>Cerrar</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </View>
+    </Layout>
   );
 }
 

@@ -31,3 +31,63 @@ export const createRequest = async request => {
     throw error;
   }
 };
+
+export const getRequests = async () => {
+  try {
+    const response = await axios.get(`${API}/requests`);
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const getRequest = async id => {
+  try {
+    const response = await axios.get(`${API}/requests/${id}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export const createLog = async log => {
+  try {
+    const response = await axios.post(`${API}/logs`, log);
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export const getLog = async id => {
+  try {
+    const response = await axios.get(`${API}/logs/${id}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export const createMessage = async message => {
+  try {
+    const response = await axios.post(`${API}/messages`, message);
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const getMessages = async id => {
+  try {
+    const response = await axios.get(`${API}/messages/${id}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

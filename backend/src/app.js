@@ -11,11 +11,7 @@ import messageRoutes from "./routes/message.routes.js";
 
 const app = express();
 
-const corsOptions = {
-  origin: 'http://localhost:19006',
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());

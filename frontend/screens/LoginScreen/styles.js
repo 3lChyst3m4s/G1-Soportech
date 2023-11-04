@@ -48,6 +48,14 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     borderWidth: 1,
   },
+  loginButton: {
+    width: 300,
+    height: 40,
+    borderRadius: 20,
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   forgotPassword: {
     color: colors.primary,
     marginBottom: 10,

@@ -4,7 +4,7 @@ import { View, Text, Image, KeyboardAvoidingView } from 'react-native';
 
 import styles from './styles';
 
-import { LoginButton } from '../../components/LoginButton';
+import { Button } from '../../components/Button';
 import { RegisterButton } from '../../components/RegisterButton';
 import { KeyboardAvoidingWrapper } from '../../components/KeyboardAvoidingWrapper';
 import { TInput } from '../../components/TInput';
@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigation.push('Root', { screen: 'Home' });
+      navigation.navigate('Root', { screen: 'Home' });
     }
   }, [isAuthenticated]);
 
@@ -69,12 +69,15 @@ const LoginScreen = ({ navigation }) => {
             value={formData.password}
             onChangeText={(text) => handleInputChange('password', text)}
           />
-          <LoginButton 
-            onPress={onSubmit}
-          />
+          <Button 
+              buttonStyle={styles.loginButton}
+              text={'Iniciar Sesión'}
+              onPress={onSubmit} 
+              color={'persian-blue'}
+            />
           <Text style={styles.forgotPassword}>¿Olvidaste tu contraseña?</Text>
           <RegisterButton
-            onPress={() => navigation.push('Register')}
+            onPress={() => navigation.navigate('Register')}
           />
         </View>
         <KeyboardAvoidingView style={{zIndex: -1}} enabled>

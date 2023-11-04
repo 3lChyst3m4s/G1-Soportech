@@ -18,12 +18,18 @@ export const createMessage = async (req, res) => {
 };
 
 export const getMessages = async (req, res) => {
-  const { logId } = req.params;
+  const { id } = req.params;
 
   try {
+    const log = await Log.findOne({
+      where: {
+        requestId: id,
+      },
+    });
+
     const messages = await Message.findAll({
       where: {
-        logId,
+        logId: log.dataValues.logId,
       },
     });
     res.status(200).json(messages);

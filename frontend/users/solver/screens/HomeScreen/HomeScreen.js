@@ -19,30 +19,29 @@ const HomeScreen = ({navigation}) => {
     <Layout 
       navigation={navigation}
       title={user.name}
-      screen={
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.button} onPress={() => handleNavigate('Incidentes')}>
-            <View style={styles.leftPart}>
-              <Image source={incidente}  style={[styles.icon, { tintColor: 'white' }]} />
-            </View>
-            <View style={styles.rightPart}>
-              <Text style={styles.number}>10</Text>
-              <Text style={styles.buttonText}>Incidentes</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.separator} />
-          <TouchableOpacity style={styles.button} onPress={() => handleNavigate('Requerimientos')}>
-            <View style={styles.leftPart}>
-              <Image source={requerimiento}  style={[styles.icon, { tintColor: 'white' }]} />
-            </View>
-            <View style={styles.rightPart}>
-              <Text style={styles.number}>5</Text>
-              <Text style={styles.buttonText}>Requerimientos</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      }
-    />
+    >
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.button} onPress={() => handleNavigate('Incidentes')}>
+          <View style={styles.leftPart}>
+            <Image source={incidente}  style={[styles.icon, { tintColor: 'white' }]} />
+          </View>
+          <View style={styles.rightPart}>
+            <Text style={styles.number}>10</Text>
+            <Text style={styles.buttonText}>Incidentes</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity style={styles.button} onPress={() => handleNavigate('Requerimientos')}>
+          <View style={styles.leftPart}>
+            <Image source={requerimiento}  style={[styles.icon, { tintColor: 'white' }]} />
+          </View>
+          <View style={styles.rightPart}>
+            <Text style={styles.number}>5</Text>
+            <Text style={styles.buttonText}>Requerimientos</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </Layout>
   );
 }
 
