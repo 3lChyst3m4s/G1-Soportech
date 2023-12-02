@@ -26,7 +26,7 @@ const Log = sequelize.define('Log', {
       key: 'userId'
     }
   },
-  resolutorId: {
+  solverId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -40,6 +40,6 @@ const Log = sequelize.define('Log', {
 
 Log.belongsTo(Request, { foreignKey: 'requestId' });
 Log.belongsTo(User, { foreignKey: 'clientId' });
-Log.belongsTo(User, { foreignKey: 'resolutorId' });
+Log.belongsTo(User, { foreignKey: 'solverId' });
 
 export default Log;

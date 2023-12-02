@@ -1,6 +1,6 @@
-@api = http://localhost:3000/tasks
+@api = http://localhost:3000/api
 
-GET {{api}}
+GET {{api}}/requestsglobal/1
 
 ###
 GET {{api}}/1

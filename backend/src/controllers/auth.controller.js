@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { createAccessToken } from "../lib/jwt.js";
 
 export const register = async (req, res) => {
-  const { name, email, password, phone, address, city, roleId } = req.body;
+  const { name, email, password, phone, address, city, photo, roleId } = req.body;
   try {
     const userFound = await User.findOne({ where: { email } });
     if (userFound) return res.status(400).json(["The email already exists"]);
@@ -17,13 +17,14 @@ export const register = async (req, res) => {
       phone,
       address,
       city,
+      photo,
       roleId,
     });
 
     const userSaved = await newUser.save();
     const token = await createAccessToken({ userId: userSaved.userId });
 
-    res.cookie("token", token);
+    res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 
     res.json({
       userId: userSaved.userId,
@@ -48,7 +49,7 @@ export const login = async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Incorrect password" });
 
-    const token = await createAccessToken({ userId: userFound.userId });
+    const token = await createAccessToken({ userId: userFound.userId, photo: userFound.photo, roleId: userFound.roleId });
 
     res.cookie("token", token);
 
@@ -60,12 +61,17 @@ export const login = async (req, res) => {
       address: userFound.address,
       city: userFound.city,
       roleId: userFound.roleId,
+      photo: userFound.photo,
       createdAt: userFound.createdAt,
       updatedAt: userFound.updatedAt,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+    if (error.name === 'SequelizeDatabaseError') {
+      res.status(500).json({ message: "Database error occurred" });
+    } else {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }  
 };
 
 export const logout = (req, res) => {
@@ -90,6 +96,7 @@ export const profile = async (req, res) => {
     address: userFound.address,
     city: userFound.city,
     roleId: userFound.roleId,
+    photo: userFound.photo,
     createdAt: userFound.createdAt,
     updatedAt: userFound.updatedAt,
   });

@@ -31,50 +31,70 @@ export const createRequest = async (req, res) => {
   }
 };
 
+const processRequests = async (requests) => {
+  const formattedRequests = await Promise.all(requests.map(async (request) => {
+    const stateId = request.dataValues.stateId;
+    const stateRequest = await StateRequest.findOne({ where: { stateId } });
+
+    return {
+      ...request.dataValues,
+      stateRequest: stateRequest.dataValues.name,
+      endTime: moment(request.dataValues.endTime).format('DD/MM/YYYY'),
+    };
+  }));
+
+  return formattedRequests;
+};
+
 export const getRequests = async (req, res) => {
   const { userId } = req.user;
+  const { id } = req.params;
 
   try {
     const userFound = await User.findOne({ where: { userId } });
     const { roleId } = userFound;
 
+    let condition = { conditionId: id };
     if (roleId === 1) {
-      const requests = await Request.findAll({
-        where: {
-          clientId: userId,
-        },
-      });
-    
-      const formattedRequests = await Promise.all(requests.map(async request => {
-        const stateId = request.dataValues.stateId;
-        const stateRequest = await StateRequest.findOne({ where: { stateId } });
-    
-        return {
-          ...request.dataValues,
-          stateRequest: stateRequest.dataValues.name,
-          endTime: moment(request.dataValues.endTime).format('DD/MM/YYYY'),
-        };
-      }));
-    
-      res.status(200).json(formattedRequests);
-    } else if (roleId === 2 || roleId === 3) {
-      const requests = await Request.findAll();
-      
-      const formattedRequests = await Promise.all(requests.map(async request => {
-        const stateId = request.dataValues.stateId;
-        const stateRequest = await StateRequest.findOne({ where: { stateId } });
-    
-        return {
-          ...request.dataValues,
-          stateRequest: stateRequest.dataValues.name,
-          endTime: moment(request.dataValues.endTime).format('DD/MM/YYYY'),
-        };
-      }));
+      condition.clientId = userId;
+    }
 
-      res.status(200).json(formattedRequests);
+    const requests = await Request.findAll({
+      where: condition,
+    });
+
+    const formattedRequests = await processRequests(requests);
+
+    res.status(200).json(formattedRequests);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getRequestsFiltered = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    let connectionIds = [];
+
+    if (id === '1') {
+      connectionIds = [1, 2, 3, 4];
+    } else if (id === '2') {
+      connectionIds = [5, 6, 7, 8];
     } else {
       res.status(403).json({ message: 'No tienes permisos para acceder a estas solicitudes.' });
     }
+
+    const requests = await Request.findAll({
+      where: {
+        connectionId: connectionIds,
+        conditionId: 1,
+      },
+    });
+
+    const formattedRequests = await processRequests(requests);
+
+    res.status(200).json(formattedRequests);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -134,7 +154,7 @@ export const deleteRequest = async (req, res) => {
 
 export const updateRequest = async (req, res) => {
   const { id } = req.params;
-  const { title, solverId, connectionId, description, endTime, classroom, stateId, conditionId } = req.body;
+  const { title, solverId, connectionId, description, endTime, classroom, stateId, conditionId, answerForm } = req.body;
 
   const updateFields = {};
 
@@ -149,6 +169,7 @@ export const updateRequest = async (req, res) => {
   if (classroom) updateFields.classroom = classroom;
   if (stateId) updateFields.stateId = stateId;
   if (conditionId) updateFields.conditionId = conditionId;
+  if (answerForm) updateFields.answerForm = answerForm;
 
   try {
     await Request.update(
@@ -160,6 +181,34 @@ export const updateRequest = async (req, res) => {
       }
     );
     res.status(200).json({ message: 'Request updated successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+export const getCountRequests = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    let connectionIds = [];
+
+    if (id === '1') {
+      connectionIds = [1, 2, 3, 4];
+    } else if (id === '2') {
+      connectionIds = [5, 6, 7, 8];
+    } else {
+      return res.status(403).json({ message: 'No tienes permisos para acceder a estas solicitudes.' });
+    }
+
+    const count = await Request.count({
+      where: {
+        connectionId: connectionIds,
+        conditionId: 1,
+      },
+    });
+  
+    res.status(200).json({ count });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
