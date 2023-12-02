@@ -1,1 +1,7 @@
-{}
+{
+  "scripts": {
+    "start": "npm-run-all -p start-backend start-frontend",
+    "start-backend": "cd backend && npm run dev",
+    "start-frontend": "cd frontend && npm start"
+  }
+}
