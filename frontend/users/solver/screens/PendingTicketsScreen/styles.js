@@ -1,0 +1,168 @@
+import { StyleSheet } from "react-native";
+import colors from '../../../../config/colors';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  statusContainer: {
+    flexDirection: "row",
+    marginTop: 30,
+    marginHorizontal: 20,
+  },
+  space: {
+    width: 0.5,
+  },
+  statusBox: {
+    backgroundColor: colors.primary,
+    padding: 3,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    width: 85,
+    height: 25,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  statusText: {
+    color: "white",
+    fontWeight: "light",
+    fontSize: 11,
+  },
+  titleContainer: {
+    marginVertical: 15,
+    marginHorizontal: 20,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    borderWidth: 1,
+    borderColor: "#D8D8D8",
+  },
+  requirementTitle: {
+    fontSize: 15,
+    fontWeight: "light",
+    backgroundColor: colors.primGray,
+    padding: 10,
+  },
+  requirementBox: {
+    backgroundColor: "#E7E7E",
+    borderColor: "E7E7E",
+  },
+  filterContainer: {
+    marginTop: 20,
+    paddingHorizontal: 20,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  filterText: {
+    fontWeight: "bold",
+    fontSize: 16,
+    marginRight: 10,
+  },
+  filterInput: {
+    flex: 1,
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+  },
+  tableContainer: {
+    marginTop: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20,
+  },
+  table: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+  },
+  tableHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: colors.primary,
+    padding: 10,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+  },
+  headerCell: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  tableRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: "white",
+    borderRadius: 5,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+  },
+  tableCell: {
+    textAlign: "center",
+    minWidth: 100,
+    padding: 5,
+  },
+  statusCell: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: colors.primary,
+    paddingVertical: 5,
+    borderRadius: 5,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContainer: {
+    position: "absolute",
+    top: "40%", 
+    left: "10%",
+    right: "10%",
+    backgroundColor: "white",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomStartRadius: 10,
+    borderBottomRightRadius: 10,
+    alignSelf: 'center', 
+    maxWidth: 300, 
+  },
+  modalContent: {
+    padding: 20,
+    justifyContent: 'center', 
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding:10,
+  },
+  modalOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "gray",
+  },
+  optionImage: {
+    width: 24, 
+    height: 24, 
+    marginRight: 10, 
+  },
+  optionText: {
+    fontSize: 16,
+  },
+});
+
+export default styles;
