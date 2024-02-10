@@ -90,7 +90,7 @@ const DashboardScreen = ({ navigation }) => {
                 </View>
 
                 <View style={styles.randomCard}>
-                  <Text style={styles.randomCardTitle}>Tickets en Proceso</Text>
+                  <Text style={styles.randomCardTitle}>Tickets por Atender</Text>
                   <Text style={styles.randomCardNumber}>
                     {generateRandomNumber()}
                   </Text>
@@ -104,7 +104,7 @@ const DashboardScreen = ({ navigation }) => {
                 </View>
 
                 <View style={styles.randomCard}>
-                  <Text style={styles.randomCardTitle}>Tickets en Proceso</Text>
+                  <Text style={styles.randomCardTitle}>Tickets Observados</Text>
                   <Text style={styles.randomCardNumber}>
                     {generateRandomNumber()}
                   </Text>

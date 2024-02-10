@@ -20,7 +20,7 @@ const RequestList = () => {
 
   useEffect(() => {
     loadRequests();
-  }, [isFocused]);
+  }, [isFocused, data]); // Tratar de mejorar el renderizado
 
   const renderTableRow = ({ item }) => {
     return <RequestItem item={item}/>

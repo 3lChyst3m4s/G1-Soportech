@@ -47,24 +47,14 @@ router.post(
  * put:
  *  summary: Update a request
  *  tags: [Requests]
- */
-router.route("/requests/:id")
-  .get(authRequired, getRequest)
-  .put(authRequired, updateRequest);
-
-
-/**
- * @swagger
- * /api/requests/{id}:
  * delete:
  *  summary: Remove a request
  *  tags: [Requests]
  */
-router.delete(
-  "/requests/:id", 
-  authRequired, 
-  deleteRequest
-);
+router.route("/requests/:id")
+  .get(authRequired, getRequest)
+  .put(authRequired, updateRequest)
+  .delete(authRequired,deleteRequest);
 
 /**
  * @swagger

@@ -61,7 +61,7 @@ const Request = sequelize.define('Request', {
     allowNull: false
   },
   startTime: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATE, 
     allowNull: false,
     defaultValue: DataTypes.NOW
   },

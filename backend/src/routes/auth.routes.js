@@ -22,8 +22,8 @@ const router = Router();
  * @swagger
  * /api/auth/register:
  * post:
- *  summary: Register a new user
- *  tags: [Auth]
+ *   summary: Register a new user
+ *   tags: [Auth]
  */
 router.post("/register", validateSchema(registerSchema), register);
 

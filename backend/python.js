@@ -1,16 +1,21 @@
-import { exec } from 'child_process';
+const { spawn } = require('child_process');
 
-export const analizarSentimiento = (requestId) => {
-  // Ejecutar el script de Python con el requestId como argumento
-  exec(`python ../sentiment_analysis/main.py ${requestId}`, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      console.error(`Error: ${stderr}`);
-      return;
-    }
-    console.log(`Resultado: ${stdout}`);
+const analizarSentimiento = (requestId) => {
+  const python = spawn('python', ['../sentiment_analysis/main.py', requestId]);
+
+  python.stdout.on('data', (data) => {
+    console.log(`stdout: ${data}`);
+  });
+
+  python.stderr.on('data', (data) => {
+    console.error(`stderr: ${data}`);
+  });
+
+  python.on('close', (code) => {
+    console.log(`child process exited with code ${code}`);
   });
 }
+
+analizarSentimiento(1);
+
+module.exports = analizarSentimiento;

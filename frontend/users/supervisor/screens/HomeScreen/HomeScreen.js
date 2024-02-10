@@ -10,9 +10,11 @@ import rojo from "../../../../assets/images/rojo.png";
 import amarillo from "../../../../assets/images/amarillo.png";
 import verde from "../../../../assets/images/verde.png";
 
+import { useIsFocused } from '@react-navigation/native';
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
+  const isFocused = useIsFocused();
 
   const loadRequests = async () => {
     const response = await getRequests(1);
@@ -22,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     loadRequests();
-  }, []);
+  }, [isFocused]);
 
   return (
     <Layout 
@@ -34,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
           <View style={styles.tableContainer}>
             <View style={styles.table}>
               <View style={styles.tableHeader}>
-                <Text style={[styles.headerCell, { width: 100 }]}>Nombre</Text>
+                <Text style={[styles.headerCell, { width: 100 }]}>Codigo</Text>
                 <Text style={[styles.headerCell, { width: 200 }]}>Título</Text>
                 <Text style={[styles.headerCell, { width: 100 }]}>Fecha</Text>
                 <Text style={[styles.headerCell, { width: 150 }]}>Estado</Text>
