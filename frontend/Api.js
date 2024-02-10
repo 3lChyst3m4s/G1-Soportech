@@ -2,6 +2,10 @@ import axios from 'axios'
 
 export const API = 'http://192.168.1.67:3000/api';
 
+export const API2 = 'http://192.168.1.67:3000/api';
+
+export const API3 = 'http://192.168.1.67:3000/api';
+
 export const registerRequest = async user => {
   try {
     const response = await axios.post(`${API}/register`, user);
