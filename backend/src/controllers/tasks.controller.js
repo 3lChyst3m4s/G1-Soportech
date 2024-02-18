@@ -2,7 +2,7 @@ import Task from '../models/task.model.js';
 
 export const getTasks = async (req, res) => {
   try {
-    res.json('Obtencion tareas');
+    res.send('Obtencion tareas');
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
