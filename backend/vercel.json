@@ -1,0 +1,12 @@
+{
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@now/node-server",
+      "config": { "maxLambdaSize": "15mb" }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "src/index.js" }
+  ]
+}
