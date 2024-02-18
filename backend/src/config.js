@@ -8,7 +8,7 @@ export const database = {
   database: process.env.DB_DATABASE
 }
 export const server = {
-  port: process.env.PORT || 3000
+  port: process.env.PORT
 }
 export const authJwt = {
   jwtSecret: 'tu_clave_secreta_para_jwt',
