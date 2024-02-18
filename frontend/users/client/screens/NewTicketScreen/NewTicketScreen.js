@@ -43,10 +43,10 @@ const NewTicketScreen = ({ navigation }) => {
   };
 
   const options = [
-    { id: 1, label: "Hardware" },
-    { id: 2, label: "Software" },
+    { id: 1, label: "Fallo en computadora o impresora" },
+    { id: 2, label: "Problemas en software" },
     { id: 3, label: "Conectividad" },
-    { id: 4, label: "Ambiente" },
+    { id: 4, label: "Otros" },
   ];
 
   const TypeTicket = ({ selectedOption, onPress }) => {
@@ -107,7 +107,7 @@ const NewTicketScreen = ({ navigation }) => {
         <View style={styles.datosContainer}>
           
           <View style={styles.space3}>
-            <Text style={styles.label}>Aula:</Text>
+            <Text style={styles.label}>Oficina:</Text>
             <TextInput
               style={styles.contenedor}
               placeholder="105 - NP"

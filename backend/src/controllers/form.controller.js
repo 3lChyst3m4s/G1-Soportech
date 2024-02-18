@@ -1,5 +1,4 @@
 import Form from "../models/form.model";
-import { analizarSentimiento } from "../../python";
 
 export const createForm = async (req, res) => {
   const { id, starCount, sentimentValue } = req.body;
@@ -10,7 +9,6 @@ export const createForm = async (req, res) => {
       starCount,
       sentimentValue,
     });
-    analizarSentimiento(form.formId);
     res.status(201).json(form);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -1,11 +1,12 @@
 import app from "./app";
-import { sequelize } from "./database";
+import { sequelize, connect } from "./database";
 import { server } from "./config";
 
 const PORT = server.port;
 
 const startServer = async () => {
   try {
+    await connect();
     await sequelize.sync({ force: false });
     console.log('Base de datos sincronizada');
     

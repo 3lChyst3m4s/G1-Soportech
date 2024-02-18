@@ -10,7 +10,7 @@ const SupervisorStack = createStackNavigator();
 const SupervisorNavigator = () => {
   return (
     <SupervisorStack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Dashboard"
       screenOptions={{ headerShown: false }}
     >
       <SupervisorStack.Screen name="Home" component={HomeScreen} />

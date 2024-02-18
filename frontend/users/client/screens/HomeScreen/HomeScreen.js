@@ -18,7 +18,7 @@ const HomeScreen = ({navigation}) => {
     >
       <View style={styles.container}>
         <View style={styles.menu}>
-          <RequestList />          // Mejorar render con la actualizacion del contexto de requests  
+          <RequestList />           
           <NavButton
             title="Nueva Consulta"
             onPress={() => navigation.navigate('Create')}

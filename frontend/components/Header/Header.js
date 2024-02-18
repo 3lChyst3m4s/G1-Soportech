@@ -12,6 +12,7 @@ import { useAuth } from '../../context/AuthContext';
 const Header = ({ nombreVista, onMenuPress, navigation }) => {
   const { user } = useAuth();
 
+
   return (
     <View style={styles.container}>
       <View style={styles.square}></View>
@@ -20,7 +21,7 @@ const Header = ({ nombreVista, onMenuPress, navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
             <View style={styles.spaceImage} />
             <Image
-              source={uri = user.photo ? { uri: user.photo } : persona}
+              source={{ uri: 'https://www.uch.edu.pe/sites/default/files/blog-img/uch_efemeride_dia_del_administrador.jpg' }}
               style={styles.profileImage}
             />
           </TouchableOpacity>

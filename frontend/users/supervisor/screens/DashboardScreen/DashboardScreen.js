@@ -11,8 +11,8 @@ const generateRandomNumber = () => {
 
 const renderStars = (rating) => {
   const stars = [];
-  for (let i = 1; i <= 5; i++) {
-    const starColor = i <= rating ? 'yellow' : 'gray';
+  for (let i = 1; i <= 5; i++) {  
+    const starColor = i <= rating ? '#FFD400' : '#D5D8E8';
     stars.push(
       <Text key={i} style={[styles.star, { color: starColor }]}>★</Text>
     );
@@ -29,10 +29,10 @@ const renderStars = (rating) => {
 
 const DashboardScreen = ({ navigation }) => {
   const meters = [
-    { name: 'JUAN', percentage: 85 },
-    { name: 'PEDRO', percentage: 45 },
-    { name: 'LUIS', percentage: 15 },
-    { name: 'LIAN', percentage: 63 },
+    { name: 'JUAN', percentage: 85, color: '#2C3B9C' },
+    { name: 'PEDRO', percentage: 45, color: '#4488FD' },
+    { name: 'LUIS', percentage: 15, color: '#0DC0C8' },
+    { name: 'LIAN', percentage: 63, color: '#00CFBD' },
   ];
 
   return (
@@ -50,13 +50,13 @@ const DashboardScreen = ({ navigation }) => {
                   <View style={styles.meterProgressContainer}>
                     <Svg width="100%" height={10}>
                       <G>
-                        <Rect width="100%" height="100%" rx={5} ry={5} fill="#ccc" />
+                        <Rect width="100%" height="100%" rx={5} ry={5} fill="#D5D8E8" />
                         <Rect
                           width={(meter.percentage / 100) * 100 + '%'}
                           height="100%"
                           rx={5}
                           ry={5}
-                          fill="#4CAF50"
+                          fill={meter.color}
                         />
                       </G>
                     </Svg>

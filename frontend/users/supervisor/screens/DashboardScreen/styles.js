@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 10,
-    textAlign: 'center', // Añadir esta propiedad
+    textAlign: 'center',
   },
   randomCardNumber: {
     fontSize: 40,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   star: {
     fontSize: 36,
-    color: 'yellow',
+    color: '#FFD400',
   },
 });
 
