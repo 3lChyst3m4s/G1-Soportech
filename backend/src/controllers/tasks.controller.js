@@ -2,12 +2,7 @@ import Task from '../models/task.model.js';
 
 export const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.findAll({
-      where: {
-        userId: req.user.id,
-      },
-    });
-    res.json(tasks);
+    res.json('Obtencion tareas');
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

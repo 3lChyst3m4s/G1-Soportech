@@ -26,7 +26,7 @@ const router = new Router();
  *  summary: Get tasks by id
  *  tags: [Task]
  */
-router.get("/tasks/:id", authRequired, getTasks);
+router.get("/tasks/:id", getTasks);
 
 /**
  * @swagger
@@ -35,7 +35,7 @@ router.get("/tasks/:id", authRequired, getTasks);
  *  summary: Get all tasks
  *  tags: [Task]
  */
-router.get("/tasks", authRequired, getTask);
+router.get("/tasks", getTask);
 
 /**
  * @swagger
@@ -46,7 +46,6 @@ router.get("/tasks", authRequired, getTask);
  */
 router.post(
   "/tasks",
-  authRequired,
   validateSchema(createTaskSchema),
   createTask
 );
@@ -58,7 +57,7 @@ router.post(
  *  summary: Delete a task
  *  tags: [Task]
  */
-router.delete("/tasks/:id", authRequired, deleteTask);
+router.delete("/tasks/:id", deleteTask);
 
 /**
  * @swagger
@@ -67,6 +66,6 @@ router.delete("/tasks/:id", authRequired, deleteTask);
  *  summary: Update a task
  *  tags: [Task]
  */
-router.put("/tasks/:id", authRequired, updateTask);
+router.put("/tasks/:id", updateTask);
 
 export default router;
