@@ -21,7 +21,7 @@ const Header = ({ nombreVista, onMenuPress, navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
             <View style={styles.spaceImage} />
             <Image
-              source={{ uri: 'https://www.uch.edu.pe/sites/default/files/blog-img/uch_efemeride_dia_del_administrador.jpg' }}
+              source={{ uri: user.photo || persona}}
               style={styles.profileImage}
             />
           </TouchableOpacity>
