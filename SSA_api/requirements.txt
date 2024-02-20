@@ -1,0 +1,8 @@
+spacy
+nltk
+nrclex
+scikit-fuzzy
+googletrans==4.0.0-rc1
+matplotlib
+Flask
+emoji==1.6.3
