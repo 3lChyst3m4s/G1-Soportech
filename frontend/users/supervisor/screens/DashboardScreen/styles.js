@@ -34,6 +34,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
     borderRadius: 5,
   },
+  chartContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+    marginTop: 10,
+    marginBottom: 10,
+  },
   rightColumn: {
     flex: 1,
     padding: 16,

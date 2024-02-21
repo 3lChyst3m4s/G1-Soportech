@@ -3,6 +3,7 @@ import { View, ScrollView, Text, Platform } from 'react-native';
 import Svg, { G, Rect } from 'react-native-svg';
 
 import { Layout } from "../../../../components/Layout";
+import { LineChart } from '../../components/LineChartComponent';
 import styles from './styles';
 
 const generateRandomNumber = () => {
@@ -35,6 +36,22 @@ const DashboardScreen = ({ navigation }) => {
     { name: 'LIAN', percentage: 63, color: '#00CFBD' },
   ];
 
+  const option = {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        data: [150, 230, 224, 218, 135, 147, 260],
+        type: 'line',
+      },
+    ],
+  };
+
   return (
     <Layout
       navigation={navigation}
@@ -64,6 +81,10 @@ const DashboardScreen = ({ navigation }) => {
                   <Text>{meter.percentage}%</Text>
                 </View>
               ))}
+
+              <View style={styles.chartContainer}>
+                <LineChart option={option} />
+              </View>
             </View>
             <View style={styles.rightColumn}>
               {renderStars(4)}
