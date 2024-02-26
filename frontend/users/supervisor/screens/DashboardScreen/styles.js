@@ -10,11 +10,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   mobileLayout: {
-    flex: 1,
+    backgroundColor: '#fff',
   },
   leftColumn: {
     flex: 1,
     padding: 16,
+  },
+  globalTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginLeft: 20,
+    marginVertical: 20,
+    textAlign: 'left',
   },
   meter: {
     backgroundColor: '#fff',
@@ -26,9 +33,10 @@ const styles = StyleSheet.create({
     marginBottom:5,
   },
   meterText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#7C7D99'
   },
   meterProgressContainer: {
     backgroundColor: '#ccc',
@@ -37,7 +45,7 @@ const styles = StyleSheet.create({
   chartContainer: {
     backgroundColor: '#fff',
     borderRadius: 10,
-    padding: 20,
+    padding: 10,
     marginTop: 10,
     marginBottom: 10,
   },
@@ -49,7 +57,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    height: "80%",
+    height: "60%",
     width: "100%",
   },
   randomCard: {
@@ -60,24 +68,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10,
-    height: 190,
+    height: 180,
   },
   randomCardTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginLeft: 10,
+    marginVertical: 10,
     textAlign: 'center',
   },
   randomCardNumber: {
-    fontSize: 40,
+    fontSize: 35,
+    fontWeight: 'bold',
+    color: "#2738C8"
   },
   satisfactionCard: {
     backgroundColor: '#fff',
     borderRadius: 10,
-    padding: 20,
+    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    height: "20%",
+    height: "10%",
     width: "100%",
     marginBottom:10,
   },
@@ -89,7 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   star: {
-    fontSize: 36,
+    fontSize: 40,
     color: '#FFD400',
   },
 });

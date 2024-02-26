@@ -1,15 +1,18 @@
-import { useRef, useEffect } from 'react';
-import { Dimensions } from 'react-native';
-import { SvgChart, SVGRenderer } from '@wuba/react-native-echarts';
+import React, { useRef, useEffect } from 'react';
 import * as echarts from 'echarts/core';
+import { LineChart, PieChart } from 'echarts/charts';
+import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
+import { SVGRenderer, SvgChart } from '@wuba/react-native-echarts';
+import { Dimensions, View } from 'react-native';
 
-const E_HEIGHT = 400;
-const E_WIDTH = Dimensions.get('window').width;
+echarts.use([SVGRenderer, LineChart, GridComponent, PieChart, TooltipComponent, LegendComponent]);
 
-echarts.use([SVGRenderer]);
+const LineChartComponent = ({ option }) => {
+  const skiaRef = useRef(null);
 
-const LineChart = ({ option }) => {
-  const skiaRef = useRef<any>(null);
+  const E_HEIGHT = 400;
+  const E_WIDTH = Dimensions.get('screen').width;
+
 
   useEffect(() => {
     let chart;
@@ -25,11 +28,13 @@ const LineChart = ({ option }) => {
     }
 
     return () => chart?.dispose();
-  }, [option]);
+  }, []);
 
   return (
-    <SvgChart ref={skiaRef} />
+    <View style={{position: "absolute", top: "-75%"}}>
+      <SvgChart ref={skiaRef} />
+    </View>
   );
 }
 
-export default LineChart;
+export default LineChartComponent;
